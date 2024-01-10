@@ -58,26 +58,38 @@
 
 // taro.move();
 
-class Parent {
-    constructor(value) {
-        this.parentProp = value;
-    }
+// class Parent {
+//     constructor(value) {
+//         this.parentProp = value;
+//     }
 
-    parentMethod() {
-        console.log("親クラスのメソッド");
+//     parentMethod() {
+//         console.log("親クラスのメソッド");
+//     }
+// }
+
+// class Child extends Parent {
+//     constructor(parentProp, childProp) {
+//         super(parentProp);
+//         this.childProp = childProp;
+//     }
+// }
+
+// const parent = new Parent("aaaaaa");
+// const childObject = new Child("親", "子");
+// console.log(parent.parentProp);
+// console.log(childObject.childProp);
+
+// childObject.parentMethod();
+
+class Person {
+    constructor() {
+        this.name = "太郎";
+    }
+    hello() {
+        console.log("hello");
     }
 }
 
-class Child extends Parent {
-    constructor(parentProp, childProp) {
-        super(parentProp);
-        this.childProp = childProp;
-    }
-}
-
-const parent = new Parent("aaaaaa");
-const childObject = new Child("親", "子");
-console.log(parent.parentProp);
-console.log(childObject.childProp);
-
-childObject.parentMethod();
+const taro = new Person;
+taro.hello();
