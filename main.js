@@ -1,18 +1,8 @@
 "use strict";
 
-function sleep (ms) {
-    setTimeout(function() {
-        alert("sleep関数が完了しました。");
-    }, ms);
-}
+let val = 0;
 
-sleep(5000); // 後の処理に関わらず5秒後に処理が実行される。
+setTimeout( () => {val = 1;}, 1000);
 
-
-// ボタンがクリックされたときに実行される。
-const button = document.querySelector("button");
-function clickHandler() {
-    alert("ボタンがクリックされました。")
-}
-
-button.addEventListener("click", clickHandler);
+// setTimeout関数で1000ミリ秒後に1を代入と指定しているので、console.logの結果は0となる。
+console.log(val);
