@@ -30,6 +30,9 @@ header ul li {
     display: flex;
 }
 
+.nenuSentence a {
+    text-decoration: underline;
+}
 .footer {
     background-color: aquamarine;
 }
