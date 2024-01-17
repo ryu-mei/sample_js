@@ -1,13 +1,14 @@
 "use strict";
 
-// コールバック
-
-let iwate = function () {
-    console.log("iwate")
+// async
+async function asyncFunction() {
+    return "hello";
 }
 
-let prefecture = function(callback) {
-    return callback;
-}
+asyncFunction().then((returnVal) => {
+    console.log(returnVal);
+});
 
-prefecture(iwate());
+const contact = document.querySelector("#contact");
+console.log(contact.textContent);
+contact.textContent = "コンタクト";
