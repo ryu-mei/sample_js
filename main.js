@@ -1,14 +1,15 @@
 "use strict";
 
-// async
-async function asyncFunction() {
-    return "hello";
+
+// ここから下はポートフォリオ作成のためのプログラム
+{
+    // アイコンをクリックしたときにCSSを変えるプログラム
+    // ・アイコンをクリックする
+    // ・クラスを消す
+
+
+    // navクラスを消す
+    const getNav = document.querySelector(".nav");
+    getNav.classList.remove("nav");
+    console.log(getNav);
 }
-
-asyncFunction().then((returnVal) => {
-    console.log(returnVal);
-});
-
-const contact = document.querySelector("#contact");
-console.log(contact.textContent);
-contact.textContent = "コンタクト";
