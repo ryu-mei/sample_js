@@ -16,10 +16,17 @@ body {
     font-family: Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
 }
 
+
+.navBox {
+    width: 60px;
+    height: 50px;
+    background-color: greenyellow;
+    margin: 0 0 0 auto;
+}
+
 .nav {
-    background-color: aquamarine;
-    display: flex;
-    justify-content: flex-end;
+    position: relative;
+    right: 1000px;
 }
 
 header ul li {
