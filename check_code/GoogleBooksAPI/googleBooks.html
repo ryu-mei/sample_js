@@ -14,13 +14,17 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        const url = "https://www.googleapis.com/books/v1/volumes?q="+$("#key").val();
-        $.ajax({
-            url: url,
-            dataType: "json"
-        }).done(function(data) {
-            console.log(data);
+        //jquery
+        $("#send").on("click", function(){
+            const url = "https://www.googleapis.com/books/v1/volumes?q="+$("#key").val();
+            $.ajax({
+                url: url,
+                dataType: "json"
+            }).done(function(data) {
+                console.log(data);
+            });
         });
+
     </script>
 </body>
 </html>
