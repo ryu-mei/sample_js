@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>googlebooksAPIでAjaxを作りながら学ぼう</title>
+</head>
+<body>
+    <h1>本の検索</h1>
+    <div>
+        <input type="text" id="key">
+        <button id="send">検索</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const url = "https://www.googleapis.com/books/v1/volumes?q="+$("#key").val();
+        $.ajax({
+            url: url,
+            dataType: "json"
+        }).done(function(data) {
+            console.log(data);
+        });
+    </script>
+</body>
+</html>
