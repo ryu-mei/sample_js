@@ -1,9 +1,10 @@
+'use client'
+
 import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
-import Header from "@/components/header";
-import Hero from "@/components/hero";
-import Footer from "@/components/footer";
 import { Main } from "next/document";
+import Layout from "@/components/layout";
+import Hero from "@/components/hero";
 
 // function EachPost() {
 //   return (
@@ -38,12 +39,10 @@ export default function Home() {
   const props1 = { title: "タイトル1", url: "post1.html"}
   const props2 = { title: "タイトル2", url: "post2.html"}
   return  (
-    <> 
-      <Header />
-      <main>
+    <>
+      <Layout>
         <Hero />
-      </main>
-      <Footer />
+      </Layout> 
     </>
   )
 }
