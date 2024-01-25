@@ -1,15 +1,5 @@
-import Header from '../components/header'
-import Hero from '../components/hero'
-import Footer from '../components/footer'
-export default function Home() {
-  return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-      </main>
-      <Footer />
-    </>
+import Hero from 'components/hero'
 
-  )
+export default function Home() {
+  return <Hero />
 }
