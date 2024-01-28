@@ -5,7 +5,7 @@ export default function Layout({children}) {
     return (
         <>
             <Header />
-                <main style={{color: "red"}}>{children}</main>
+                <main >{children}</main>
             <Footer />
         </>
     )
