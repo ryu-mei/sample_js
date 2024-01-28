@@ -5,19 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <title>Swiperを使って横に流れるスライドをつくる</title>
 </head>
 <body>
-    <div class="swiper">
-        <div class="swiper-wapper">
-            <div class="swiper-slide">slide1</div>
-            <div class="swiper-slide">slide2</div>
-            <div class="swiper-slide">slide3</div>
+    <div class="container">
+        <div class="swiper sideway-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img/pexels-ana-m-6610749.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="img/pexels-corné-nel-19792518.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="img/pexels-joem-castillo-19985060.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="img/pexels-photographie-amg-19898940.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="img/pexels-yassen-kounchev-19845411.jpg" alt=""></div>
+            </div>
         </div>
     </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
