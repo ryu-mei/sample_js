@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
     loop: true,
     loopedSlides: 5,
     slidePerView: "auto",
-    speed: 2000,
+    speed: 5000,
     direction: "horizontal",
     autoplay: {
       delay: 0,

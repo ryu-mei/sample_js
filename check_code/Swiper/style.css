@@ -8,6 +8,12 @@
 }
 
 .swiper .swiper-slide {
-    height: 320px !important;
+    height: 500px !important;
     width: auto !important;
+}
+
+.description {
+    margin-bottom: 30px;
+    /* inline-size: 300px; */
+    overflow-wrap: break-word;
 }
