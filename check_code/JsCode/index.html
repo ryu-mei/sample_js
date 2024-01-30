@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コードチェック</title>
+    <title>コードチェック(JSON)</title>
 </head>
 <body>
     <h1>コードのチェックです。</h1>
     <script>
-        // setIntervalの確認
-        const second = 1000;
-        setInterval(function(){
-            console.log("1秒ごとに表示されます。");
-        }, second)
+        // JSONの確認
+        const o1 = {
+            name: "taro",
+            email: "taro@gmail.jp",
+            address: "tokyo"
+        }
+        // JSON文字列に変換
+        const json = JSON.stringify(o1);
+        // ローカルストレージにデータを追加
+        localStorage.setItem("OBJ", json);
+        // ローカルストレージからデータを取得
+        const val = localStorage.getItem("OBJ");
+        // オブジェクトに戻す
+        const o2 = JSON.parse(val);
+        console.log(o2);
     </script>
 </body>
 </html>
