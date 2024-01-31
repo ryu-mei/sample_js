@@ -4,26 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コードチェック(JSON)</title>
+    <title>コードチェック(関数)</title>
 </head>
 <body>
     <h1>コードのチェックです。</h1>
+    <div class="yazirushi">
+        表示
+        <div class="hyouzi"></div>
+    </div>
     <script>
-        // JSONの確認
-        const o1 = {
-            name: "taro",
-            email: "taro@gmail.jp",
-            address: "tokyo"
+        // 関数宣言
+        // function price(val) {
+        //     let hyouzi = document.querySelector('.hyouzi');
+        //     hyouzi.innerHTML = `<strong>金額は${val}円です。</strong>`;
+        // }
+        // hyouzi(1000);
+
+        // 関数式
+
+        // let price = function(val) {
+        //     let hyouzi = document.querySelector('.hyouzi');
+        //     hyouzi.innerHTML = `<strong>金額は${val}円です</strong>`;
+        // }
+
+        // console.log(price);
+        // price(2000);
+
+        // コールバック関数
+
+        function saySomething(callback) {
+            const result = callback();
+            console.log(`hello, ${result}`)
         }
-        // JSON文字列に変換
-        const json = JSON.stringify(o1);
-        // ローカルストレージにデータを追加
-        localStorage.setItem("OBJ", json);
-        // ローカルストレージからデータを取得
-        const val = localStorage.getItem("OBJ");
-        // オブジェクトに戻す
-        const o2 = JSON.parse(val);
-        console.log(o2);
+
+        function taro() {
+            return 'taro';
+        }
+
+        function tako() {
+            return 'tako';
+        }
+
+        saySomething(taro);
+        saySomething(tako);
     </script>
 </body>
 </html>
