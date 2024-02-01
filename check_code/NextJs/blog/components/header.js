@@ -4,7 +4,7 @@ import Nav from 'components/nav'
 export default function Feader() {
     return (
         <header>
-            <Logo />
+            <Logo BoxOn />
             <Nav />
         </header>
     )
