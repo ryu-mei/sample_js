@@ -13,40 +13,10 @@
         <div class="hyouzi"></div>
     </div>
     <script>
-        // 関数宣言
-        // function price(val) {
-        //     let hyouzi = document.querySelector('.hyouzi');
-        //     hyouzi.innerHTML = `<strong>金額は${val}円です。</strong>`;
-        // }
-        // hyouzi(1000);
-
-        // 関数式
-
-        // let price = function(val) {
-        //     let hyouzi = document.querySelector('.hyouzi');
-        //     hyouzi.innerHTML = `<strong>金額は${val}円です</strong>`;
-        // }
-
-        // console.log(price);
-        // price(2000);
-
-        // コールバック関数
-
-        function saySomething(callback) {
-            const result = callback();
-            console.log(`hello, ${result}`)
-        }
-
-        function taro() {
-            return 'taro';
-        }
-
-        function tako() {
-            return 'tako';
-        }
-
-        saySomething(taro);
-        saySomething(tako);
+        let count = 0;
+        console.log(count);
+        ++count;
+        console.log(count);
     </script>
 </body>
 </html>

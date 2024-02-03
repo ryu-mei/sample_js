@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック(関数)</title>
+</head>
+<body>
+    <h1>コードのチェックです。</h1>
+    <div class="yazirushi">
+        表示
+        <div class="hyouzi"></div>
+    </div>
+    <script>
+        // let promResolve, promReject;
+
+        // const prom = new Promise((resolve, reject) => {
+        //     promResolve = resolve;
+        //     promReject = reject;
+        // });
+        // promReject()
+        // console.log(prom);
+        // promResolve('引数');
+        // console.log(prom);
+
+        const asyncFunction = async () => {
+            return "hello";
+        }
+
+        asyncFunction().then((returnVal) => {
+            console.log(returnVal);
+        });
+
+    </script>
+</body>
+</html>
