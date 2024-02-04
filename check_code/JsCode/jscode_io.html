@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック(io)</title>
+    <style>
+        .wrapper {
+            height: 200vh;
+            width: 100%;
+            background-color: #dfdfdf;
+        }
+
+        .elm {
+            width: 250px;
+            height: 250px;
+            position: absolute;
+            left: 50%;
+            top: 300px;
+            transform: translateX(-50%);
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="elm"></div>
+    </div>
+    <script>
+        const elm = document.querySelector('.elm');
+        const callback = (entries, observer) => {
+            console.log(entries);
+            entries.forEach(entry => {
+                console.log(entry);
+                if (entry.isIntersecting) {
+                    alert('要素が画面の中に入りました！');
+                } else {
+                    alert('要素が画面の外に出ました。');
+                }
+            })
+
+        }
+        const io = new IntersectionObserver(callback);
+        io.observe(elm);
+    </script>
+</body>
+</html>
