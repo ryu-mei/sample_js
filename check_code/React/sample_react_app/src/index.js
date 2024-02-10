@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Main from './component/main'
+import Header from './component/header';
+import Footer from './component/footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <>
+        <Header />
+            <Main />
+        <Footer />
+    </>
+
 );
