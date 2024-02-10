@@ -1,9 +1,9 @@
-import style from "./styles/footer.module.css"
+import style from "../styles/footer.module.css"
 
 export default function Footer() {
-    const isApple = true;
+    const isBlue = false;
 
     return (
-        <div className={style.footerColor }>footer</div>
+        <div className={ isBlue ? style.footerColorBlue : style.footerColorGreen }>footer</div>
     )
 }

@@ -1,3 +1,7 @@
-.footerColor {
+.footerColorBlue {
     background-color: blue;
+}
+
+.footerColorGreen {
+    background-color: green;
 }
