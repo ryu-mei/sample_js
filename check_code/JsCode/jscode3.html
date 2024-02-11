@@ -9,13 +9,40 @@
 <body>
     <h1>コードのチェックです。</h1>
     <script>
-        function showMessage(from, text) {
-            from = `【 ${from} 】`;
-            console.log(`${from} : ${text}`);
-        }
+        // function showMessage(from, text) {
+        //     from = `【 ${from} 】`;
+        //     console.log(`${from} : ${text}`);
+        // }
 
-        let from = "hello";
-        showMessage(from, "text");
+        // let from = "hello";
+        // showMessage(from, "text");
+
+        //callback
+        // let ask = (question, yes, no) => {
+        //     if(confirm(question)){
+        //         yes()
+        //     } else {
+        //         no()
+        //     }
+        // };
+
+        // let showOk = () => {
+        //     console.log("You agreed.")
+        // };
+
+        // let showCancel = () => {
+        //     console.log("You canceled the execution.")
+        // };
+
+        // ask("Do you agree?", showOk, showCancel);
+
+        let ask = (question, yes, no) => (confirm(question) ? yes() : no());
+
+        ask(
+            "Do you agree?",
+            () => console.log("You agreed!"),
+            () => console.log("You Canceled")
+        );
     </script>
 </body>
 </html>
