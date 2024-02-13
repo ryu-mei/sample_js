@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https:unpkg.com/ress/dist/ress.min.css" >
-    <style src="style.css" rel="stylesheet"></style>
+    <link rel="stylesheet" href="style.css">
     <title>Profile</title>
 </head>
 <body>
-    <div class="header">
-        <div class="header_logo"></div>
+    <div class="header wrapper">
+        <div class="header_logo">Profile</div>
         <ul class="nav">
             <li>About</li>
             <li>Bicycle</li>
@@ -18,19 +18,19 @@
     </div>
     <div class="main">
         <img id="big-img" src="./img/mainvisual.jpg" alt="">
-        <section class="about">
-            <h2 class="title-about"></h2>
+        <section class="about wrapper">
+            <h2 class="title-about">About</h2>
             <div class="profile">
-                <img src="./img/about.jpg" alt="">
+                <img id="profile-img" src="./img/about.jpg" alt="">
                 <div class="profile-content">
-                    <h3 class="name"></h3>
-                    <div class="profile-description"></div>
+                    <h3 class="name">Lorem, ipsum.</h3>
+                    <div class="profile-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam eius facilis, quo temporibus velit ducimus repellendus vel et debitis. Quibusdam rerum, eligendi libero vero possimus enim laudantium asperiores aperiam architecto?</div>
                 </div>
             </div>
         </section>
-        <section class="bicycle">
-            <h2 class="title-about"></h2>
-            <ul class="bicycle-content">
+        <section class="bicycle wrapper">
+            <h2 class="title-bicycle">Bicycle</h2>
+            <ul class="bicycle-content grid">
                 <li>
                     <img src="./img/bicycle1.jpg" alt="">
                     <h3 class="bicycle-title">Lorem, ipsum.</h3>
@@ -49,5 +49,6 @@
             </ul>
         </section>
     </div>
+    <div class="footer">&copy; 2020 Profile</div>
 </body>
 </html>

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: 'Yu Gothic';
+}
+
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+}
+
+/* メインのイメージ */
+#big-img {
+    width: 100%;
+}
+
+/* About */
+.profile {
+    display: flex;
+}
+
+#profile-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.title-about,
+.title-bicycle {
+    text-align: center;
+}
+
+/* Bicycle */
+
+ul li {
+    list-style: none;
+}
+
+/* ul li img {
+    width: 30%;
+} */
+
+.grid {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    gap: 10px;
+}
