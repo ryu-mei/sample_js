@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>コードのチェックです。</h1>
+    <button id="btn">押す</button>
+    <script>
+        // const btn = document.querySelector('#btn');
+        // btn.addEventListener('click', (e) => {
+        //     console.log(e);
+        // })
+
+        const btn = document.querySelector('#btn');
+        let count = true;
+        btn.addEventListener('click', (e) => {
+            if(count === true) {
+                console.log(e.pointerType);
+                e.target.innerText = e.pointerType;
+                count = false;
+            } else {
+                e.target.innerText = '押す';
+                count = true;
+            }
+        });
+    </script>
+</body>
+</html>
