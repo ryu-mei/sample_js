@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>コードのチェックです。</h1>
+    <p></p>
+    <script>
+        function hello() {
+            console.log('hello');
+        }
+
+        function sum(a, b) {
+            return console.log(a + b);
+        }
+        
+        let instance = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const rand = Math.floor(Math.random() * 11);
+                if(rand < 5) {
+                    reject(rand);
+                } else {
+                    resolve(rand)
+                }
+            }, 3000)
+        }).then( value => {
+            console.log(`5以上の値[${value}]が渡ってきました。`);
+        }).catch( errValue => {
+            console.error(`5未満の値[${errValue}]が渡ってきたためエラー表示。`);
+        }).finally( () => {
+            console.log('処理を終了します。')
+        });
+
+
+        hello();
+        sum(1, 2);
+    </script>
+</body>
+</html>

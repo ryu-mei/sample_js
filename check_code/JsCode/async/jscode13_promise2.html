@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>コードのチェックです。</h1>
+    <p></p>
+    <script>
+        function hello() {
+            console.log('hello');
+        }
+
+        function sum(a, b) {
+            return console.log(a + b);
+        }
+
+        // fetch関数
+        function fetchFunk() {
+            return fetch('https://jsonplaceholder.typicode.com/users').then((response) => {
+                return response.json();
+            }).then((data) => {
+                // console.log(data[0].name);
+                const massageElm = document.querySelector('p');
+                massageElm.innerHTML = data[0].name;
+                console.log(data[0].name);
+            }).then(() => {
+                console.log('処理が終わりました。');
+            }).then(() => {
+                console.log('次の処理');
+            }).then(() => {
+                console.log('また次の処理');
+            });
+        }
+
+        // 関数の呼び出し
+        hello();
+        fetchFunk();
+        sum(1, 2);
+    </script>
+</body>
+</html>
