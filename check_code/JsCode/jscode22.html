@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>関数のチェックです。</h1>
+      
+    <script>
+        function func1() {
+            const hello = 'hello';
+            console.log(hello);
+        }
+
+        function func2() {
+            // 他の関数から関数を実行できるが他の関数の中にある変数を呼び出すことはできない
+            // 実行結果 hello
+            console.log(func1());
+            // 実行結果 Uncaught ReferenceError: hello is not defined
+            console.log(hello);
+        }
+
+        func2();
+    </script>
+</body>
+</html>
