@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>関数のチェックです。</h1>
+      
+    <script>
+        class Human {
+            static TYPE = "普通の人";
+            static staticMove() {
+                console.log(Human.TYPE + "は歩いて移動します。");
+            }
+
+            constructor(name) {
+                this.name = name;
+            }
+
+            move() {
+                console.log(this.name + "は歩いて移動します。");
+            }
+        }
+
+        const foo = new Human("Foo");
+        Human.staticMove();
+
+        console.log(Human.TYPE);
+        foo.move();
+    </script>
+</body>
+</html>

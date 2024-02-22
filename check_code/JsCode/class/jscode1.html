@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>関数のチェックです。</h1>
+      
+    <script>
+        // コードが冗長となり手間がかかる
+        // const foo = {
+        //     username: 'Foo',
+        //     password: 'foo-pwd',
+        //     login() {
+        //         console.log(`ログイン[${this.username}]/[${this.password}]`)
+        //     }
+        // }
+
+        // const bar = {
+        //     username: 'Bar',
+        //     password: 'bar-pwd',
+        //     login() {
+        //         console.log(`ログイン[${this.username}]/[${this.password}]`)
+        //     }
+        // }
+
+        // foo.login();
+        // bar.login();
+
+        class User {
+            constructor(username, password) {
+                this.username = username;
+                this.password = password;
+            }
+
+            login() {
+                console.log(`ログイン[${this.username}]/[${this.password}]`);
+            }
+        }
+
+        const foo = new User('Foo', 'foo-pwd');
+        const bar = new User('Bar', 'bar-pwd');
+        console.log(foo);
+    </script>
+</body>
+</html>
