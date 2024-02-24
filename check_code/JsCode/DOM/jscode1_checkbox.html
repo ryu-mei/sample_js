@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>関数のチェックです。</h1>
+    <input type="checkbox" id="checkA">
+    <label for="checkA">Java</label>
+    <input type="checkbox" id="checkB">
+    <label for="checkB">PHP</label>
+    
+    <script>
+        let checkb = document.querySelector('#checkB');
+
+        checkb.addEventListener('click', (e) => {
+            alert('変更できません！');
+            e.preventDefault();
+        })
+    </script>
+</body>
+</html>
