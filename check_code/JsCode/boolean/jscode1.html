@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>年齢のチェックです。</h1>
+    <input id="inputValue" type="text" placeholder="年齢を入力してください">
+    <button id="button">チェック</button>
+      
+    <script>
+        // ボタンをクリックした時のイベント
+        const button = document.querySelector('#button');
+        const addDiv = document.createElement('div');
+        const addChild = document.body.appendChild(addDiv);
+
+        button.addEventListener('click', () => {
+            const el = document.querySelector('#inputValue');
+            const isAdult = el.value;
+            console.log(isAdult);
+            if(isAdult >= 18) {
+                addChild.innerText = `${isAdult}は成人です。`;
+            } else {
+                addChild.innerText = `${isAdult}は未成年です。`;
+            }
+        });
+    </script>
+</body>
+</html>
