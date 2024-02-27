@@ -2,8 +2,9 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+
   "scripts": {
-    "dev": "next dev",
+    "dev": "SET PORT=15000 NODE_OPTIONS=--inspect && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
