@@ -21,9 +21,9 @@
             const el = document.querySelector('#inputValue');
             const isAdult = el.value;
             console.log(isAdult);
-            if(isAdult >= 18) {
+            if (isAdult >= 18) {
                 addChild.innerText = `${isAdult}は成人です。`;
-            } else {
+            } else if (isAdult < 17 && isAdult >= 0) {
                 addChild.innerText = `${isAdult}は未成年です。`;
             }
         });
