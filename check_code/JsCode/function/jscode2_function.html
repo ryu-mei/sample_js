@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>コールバック関数</h1>
+    <script>
+        function addElement() {
+            const addDiv = document.createElement('div');
+            const addChild = document.body.appendChild(addDiv);
+            addChild.innerText = '3秒後に追加します。';
+        }
+
+        setInterval(addElement, 3000);
+    </script>
+</body>
+</html>
