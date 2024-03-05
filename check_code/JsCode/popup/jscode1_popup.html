@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードチェック</title>
+</head>
+<body>
+    <h1>ポップアップウィンドウ</h1>
+    <button id="button">押してください</button>
+    <script>
+        const popButton = document.querySelector('#button');
+        const params = `scrollbars=no, resizable=no, location=no, toolbar=no, menubar=no, width=600, height=300, left=100, top=100`;
+        popButton.onclick = () => {
+            window.open('https://www.amazon.co.jp/', 'test', params);
+        }
+        // window.open('https://www.amazon.co.jp/');
+    </script>
+</body>
+</html>
