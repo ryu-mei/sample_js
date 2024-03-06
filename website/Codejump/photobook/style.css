@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.7;
+    background-color: #F4F9FF;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: decimal;
+}
+
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+.index {
+    background-color: white;
+}
