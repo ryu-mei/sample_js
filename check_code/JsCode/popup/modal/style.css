@@ -1,0 +1,13 @@
+body {
+    font-family: serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.button {
+    background: lightblue;
+    color: #fff;
+    padding: 0 2em;
+
+}
