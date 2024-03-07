@@ -4,7 +4,7 @@
   "private": true,
 
   "scripts": {
-    "dev": "SET PORT=15000 NODE_OPTIONS=--inspect && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
