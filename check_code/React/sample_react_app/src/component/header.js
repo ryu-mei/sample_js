@@ -1,5 +1,7 @@
+import style from "../styles/header.module.css"
+
 export default function Header() {
     return (
-        <div className="header">header</div>
+        <div className={ style.headerColorBlue } >header</div>
     )
 }
