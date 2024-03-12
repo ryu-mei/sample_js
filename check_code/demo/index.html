@@ -11,5 +11,12 @@
     <div class="container">
         <button class="btn">btn</button>
     </div>
+    <script>
+        const btn = document.querySelector(".btn");
+        function btnClick() {
+            console.log("ボタンを押したらhello");
+        }
+        btn.addEventListener('click', btnClick);
+    </script>
 </body>
 </html>
