@@ -1,3 +1,9 @@
+/* カスタムプロパティ */
+:root {
+    --btn-bg-color: white;
+    --btn-click-bg-color: black;
+}
+
 .container {
     width: 30px;
     height: 30px;
@@ -6,13 +12,13 @@
 
 .btn {
     width: 300px;
-    background-color: white;
+    background-color: var(--btn-bg-color);
     padding: 10px 20px;
     border: 3px solid;
     border-radius: 10px;
 }
 
 .btn:hover {
-    background-color: black;
+    background-color: var(--btn-click-bg-color);
     color: white;
 }
