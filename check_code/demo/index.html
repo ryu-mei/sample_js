@@ -9,12 +9,17 @@
 </head>
 <body>
     <div class="container">
+        <label for="name">名前</label>
+        <input type="text" id="name" name="name">
         <button class="btn">btn</button>
     </div>
     <script>
         const btn = document.querySelector(".btn");
+        const text = document.querySelector('#name');
+        console.log(text.value);
         function btnClick() {
             console.log("ボタンを押したらhello");
+            console.log(text.value);
         }
         btn.addEventListener('click', btnClick);
     </script>
