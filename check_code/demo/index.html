@@ -16,10 +16,13 @@
     <script>
         const btn = document.querySelector(".btn");
         const text = document.querySelector('#name');
-        console.log(text.value);
+        const textValue = text.value;
         function btnClick() {
-            console.log("ボタンを押したらhello");
-            console.log(text.value);
+                if(!textValue) {
+                    console.log("空です。");
+                } else {
+                    console.log("1文字以上")
+                }
         }
         btn.addEventListener('click', btnClick);
     </script>
