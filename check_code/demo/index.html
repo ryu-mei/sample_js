@@ -16,13 +16,21 @@
     <script>
         const btn = document.querySelector(".btn");
         const text = document.querySelector('#name');
-        const textValue = text.value;
+        // const emptyVal = "";
+        // const empty = emptyVal ? "入力されていません" : "入力されました";
+        // console.log(empty);
+        // if("") {
+        //     console.log("true");
+        // } else {
+        //     console.log("false");
+        // }
         function btnClick() {
-                if(!textValue) {
-                    console.log("空です。");
-                } else {
-                    console.log("1文字以上")
-                }
+            const tTextValue = typeof(text.value);
+            if(!text.value) {
+                console.log("入力されていません");
+            } else {
+                console.log(text.value);
+            }
         }
         btn.addEventListener('click', btnClick);
     </script>
