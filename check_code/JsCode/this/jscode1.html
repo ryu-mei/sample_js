@@ -10,40 +10,16 @@
     <h1>thisのチェックです。</h1>
       
     <script>
-        const foo = {
-            name: '名前',
-            ID: 'bar',
-            hello: function() {
-                console.log(this);
-                console.log('-----------');
-                console.log(this.ID);
-                console.log('-----------');
-                const bar = {
-                    name: 'bar',
-                    hello: () => {
-                        console.log(this)
-                        console.log('hello ' + this.name);
-                        console.log(this.ID);
-                    }
-                };
-
+        const students = {
+            ID: 1,
+            name: "takahashi",
+            subject: "数学",
+            foo() {
+                return this.name;
             }
-        };
-
-        foo.hello();
-        console.log(foo.name);
-
-        
-        function test() {
-            console.log(this);
         }
 
-        test();
-
-        let obj = {};
-        obj.test = test;
-        test();
-
+        console.log(students.foo());
     </script>
 </body>
 </html>
