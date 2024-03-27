@@ -7,19 +7,12 @@
     <title>コードチェック</title>
 </head>
 <body>
-    <h1>thisのチェックです。</h1>
-      
-    <script>
-        const students = {
-            ID: 1,
-            name: "takahashi",
-            subject: "数学",
-            foo() {
-                return this.name;
-            }
-        }
+    <h1>コードのチェックです。</h1>
 
-        console.log(students.foo());
+    <script>
+        const name = "foo";
+        const greeting = `Hello, my name is ${name}`;
+        console.log(greeting);  
     </script>
 </body>
 </html>
