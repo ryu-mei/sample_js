@@ -1,11 +1,9 @@
-function Cup( {guest} ) {
-  return <p>ゲストは{guest}</p>
-}
+import LikeButton from "./button";
 
 export default function Main() {
-    let cups = [];
-    for(let i = 1; i <= 12; i++) {
-      cups.push(<Cup key={i} guest={i} />);
-    }
-    return cups;
+    return (
+      <header className="App-header">
+        <LikeButton />
+      </header>
+    );
 }

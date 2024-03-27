@@ -1,0 +1,37 @@
+.likeButton {
+    background-color: pink;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+}
+
+.plusButton {
+    background-color: red;
+    color: white;
+    margin: 10px;
+    padding: 0.8rem;
+    border-bottom: 2px solid rgb(126, 122, 122);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    bottom: 0;
+}
+
+.plusButton:active {
+    border: 0;
+    bottom: -2px;
+}
+
+.minusButton {
+    background-color: blueviolet;
+    color: white;
+    padding: 0.8rem;
+    border-bottom: 2px solid rgb(126, 122, 122);    
+    border-radius: 0.4rem;
+    cursor: pointer;
+    bottom: 0;
+}
+
+.minusButton:active {
+    border: 0;
+    bottom: -2px;
+}
