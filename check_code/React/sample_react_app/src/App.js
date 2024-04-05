@@ -1,16 +1,11 @@
-const App = ({ person, age, gender, member }) => {
-    return (
-        <>
-            <p>{person}</p>
-            <p>{age}</p>
-            <p>{gender}</p>
-            <p>
-                <span>{member ? '会員' : '非会員'}</span>
-            </p>
+import React from 'react';
 
-            <hr></hr>
-        </>
-    );
+const App = () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then((res) => res.json())
+        .then((json) => console.log(json))
+        .catch(() => alert('error'));
+    return <></>;
 };
 
 export default App;
