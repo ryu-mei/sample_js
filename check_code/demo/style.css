@@ -1,26 +1,65 @@
-/* カスタムプロパティ */
-:root {
-    --btn-bg-color: white;
-    --btn-click-bg-color: black;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.container {
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(44, 41, 41);
+    color: white;
+}
+
+.header-logo {
+    font-size: 20px;
+    height: 40px;
+    width: 50px;
+    padding: 8px 8px 0 10px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.header-nav {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.header-nav li {
+    margin-left: 10px;
+}
+
+#main {
+    background-image: url(./coffee-2242213_1280.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center top;
+}
+
+.main-content {
     text-align: center;
-    background-color: rgb(148, 158, 158);
+    padding-top: 10%;
 }
 
 .wrapper {
     background-color: burlywood;
     width: 50vw;
     height: 50vh;
-}
-
-ul {
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
 }
 
-li {
+.wrapper li {
     list-style: none;
     width: 100px;
     height: 100px;
