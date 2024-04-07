@@ -1,39 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <button class="btn1">ボタン1</button>
-        <button class="btn2">ボタン2</button>
-    </div>
-    <script>
-        class Btn {
-            constructor(btn) {
-                this.btn = document.querySelector(btn);
-            }
-
-            getEl() {
-                return this.btn;
-            }
-        }
-
-        const btn1 = new Btn('.btn1');
-        const btn2 = new Btn('.btn2');
-        console.log(btn1);
-        btn1.getEl().addEventListener('click', () => {
-            console.log('hello');
-        });
-        btn2.getEl().addEventListener('click', () => {
-            console.log('how are you');
-        })
-
-
-</script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <ul class="wrapper">
+                <li class="color1">背景1</li>
+                <li class="color2">背景2</li>
+                <li class="color3">背景3</li>
+                <li class="color4">背景4</li>
+                <li class="color5">背景5</li>
+            </ul>
+        </div>
+    </body>
 </html>

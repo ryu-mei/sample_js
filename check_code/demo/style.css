@@ -6,4 +6,44 @@
 
 .container {
     text-align: center;
+    background-color: rgb(148, 158, 158);
+}
+
+.wrapper {
+    background-color: burlywood;
+    width: 50vw;
+    height: 50vh;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li {
+    list-style: none;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.color1 {
+    background-color: rgb(202, 150, 85);
+}
+
+.color2 {
+    background-color: rgb(113, 35, 111);
+}
+
+.color3 {
+    background-color: rgb(94, 79, 228);
+}
+
+.color4 {
+    background-color: rgb(98, 190, 138);
+}
+
+.color5 {
+    background-color: rgb(206, 236, 125);
 }
