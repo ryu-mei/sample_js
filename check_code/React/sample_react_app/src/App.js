@@ -1,25 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const App = () => {
-    const [data, setData] = useState(undefined);
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then((res) => res.json())
-            .then((json) => setData(json))
-            .catch(() => alert('error'));
-    }, []);
-    console.log(data);
+    const [value, setValue] = useState(0);
+    const clickHandler = () => {
+        setValue(value + 1);
+        // console.log(value);
+    };
     return (
         <>
-            {data === undefined ? (
-                ''
-            ) : (
-                <ul>
-                    {data.map((d) => {
-                        return <li key={d.id}>名前:{d.name}</li>;
-                    })}
-                </ul>
-            )}
+            <p>{value}</p>
+            <button onClick={clickHandler}>ボタン</button>
         </>
     );
 };
