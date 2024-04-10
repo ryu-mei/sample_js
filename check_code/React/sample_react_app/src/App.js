@@ -1,42 +1,23 @@
 import { useState } from 'react';
-let nextId = 0;
-const App = () => {
-    const [values, setValues] = useState('');
-    const [tasks, setTasks] = useState([]);
 
-    const changeHandler = (e) => {
-        setValues(e.target.value);
+const App = () => {
+    const personObj = { name: 'otani', position: 'pitchar' };
+    const [person, setPerson] = useState(personObj);
+    const changeName = (e) => {
+        setPerson({ ...person, name: e.target.value });
     };
-    const clickHandler = () => {
-        if (values !== '') {
-            setTasks([...tasks, { id: nextId++, name: values }]);
-        }
-        setValues('');
+    const changePosition = (e) => {
+        setPerson({ ...person, position: e.target.value });
     };
     return (
         <>
-            <input value={values} onChange={changeHandler} />
-            <button onClick={clickHandler}>ボタン</button>
-            <ul>
-                {tasks.map((task) => {
-                    return (
-                        <li key={task.id}>
-                            {task.name}
-                            <button
-                                onClick={() => {
-                                    setTasks(
-                                        tasks.filter((dtask) => {
-                                            return dtask.id !== task.id;
-                                        })
-                                    );
-                                }}
-                            >
-                                完了
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
+            <h3>{person.name}</h3>
+            <h3>{person.position}</h3>
+
+            <label>名前</label>
+            <input type="text" onChange={changeName} />
+            <label>ポジション</label>
+            <input type="text" onChange={changePosition} />
         </>
     );
 };
