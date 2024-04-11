@@ -4,7 +4,8 @@ function submitForm(answer) {
     return new Promise((resolve, reject) => {
         let incorrect = answer !== '岩手県';
         if (incorrect) {
-            reject(new Error('間違いですもう一度入力してください。'));
+            // new Errorと同じ
+            reject(Error('間違いですもう一度入力してください。'));
         } else {
             resolve();
         }
