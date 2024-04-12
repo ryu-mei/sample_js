@@ -1,59 +1,36 @@
 import { useState } from 'react';
 
-function submitForm(answer) {
-    return new Promise((resolve, reject) => {
-        let incorrect = answer !== '岩手県';
-        if (incorrect) {
-            // new Errorと同じ
-            reject(Error('間違いですもう一度入力してください。'));
-        } else {
-            resolve();
-        }
-    });
-}
-
 const App = () => {
-    const [answer, setAnswer] = useState('');
-    const [error, setError] = useState(null);
-    const [status, setStatus] = useState('typing');
-    if (status === 'success') {
-        return <h1>正解です。</h1>;
-    }
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setStatus('submitting');
-        try {
-            await submitForm(answer);
-            setStatus('success');
-        } catch (err) {
-            setStatus('typing');
-            setError(err);
-        }
-    }
-
-    function handleTextareaChange(e) {
-        setAnswer(e.target.value);
-    }
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const pointerMove = (e) => {
+        // console.log(e.clientX);
+        setPosition({
+            x: e.clientX,
+            y: e.clientY,
+        });
+    };
     return (
-        <>
-            <h3>野球クイズ</h3>
-            <p>大谷翔平選手の出身地は何県でしょう？</p>
-
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    value={answer}
-                    onChange={handleTextareaChange}
-                    disabled={status === 'submitting'}
-                />
-                <br />
-                <button
-                    disabled={answer.length === 0 || status === 'submitting'}
-                >
-                    答える
-                </button>
-                {error !== null && <p className="Error">{error.message}</p>}
-            </form>
-        </>
+        <div
+            onPointerMove={pointerMove}
+            style={{
+                position: 'relative',
+                width: '100vw',
+                height: '100vh',
+            }}
+        >
+            <div
+                style={{
+                    position: 'absolute',
+                    backgroundColor: 'red',
+                    borderRadius: '50%',
+                    transform: `translate(${position.x}px,${position.y}px)`,
+                    left: -10,
+                    top: -10,
+                    width: 20,
+                    height: 20,
+                }}
+            ></div>
+        </div>
     );
 };
 
