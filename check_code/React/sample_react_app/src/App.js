@@ -2,15 +2,12 @@ import { useState } from 'react';
 
 const App = () => {
     const [text, setText] = useState({ name: '', message: '' });
-    const [isSending, setIsSending] = useState(false);
-    const [isSent, setIsSent] = useState(false);
+    const [status, setStatus] = useState('typing');
 
     const inputChange = (e) => {
         setText({ ...text, name: e.target.value });
-        // setText({ name: e.target.value, message: text.message });
     };
     const textareaChange = (e) => {
-        // setText({ name: text.name, message: e.target.value });
         setText({ ...text, message: e.target.value });
     };
     const sendMessage = (text) => {
@@ -21,11 +18,13 @@ const App = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        setIsSending(true);
+        setStatus('sending');
         await sendMessage(text);
-        setIsSending(false);
-        setIsSent(true);
+        setStatus('sent');
     }
+
+    const isSending = status === 'sending';
+    const isSent = status === 'sent';
 
     if (isSent) {
         return (
