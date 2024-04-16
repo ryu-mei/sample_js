@@ -1,66 +1,35 @@
 import { useState } from 'react';
 
 const App = () => {
-    const [text, setText] = useState({ name: '', message: '' });
-    const [status, setStatus] = useState('typing');
+    const [position, setPosition] = useState('');
+    const [battingOrder, setBattingOrder] = useState('');
 
-    const inputChange = (e) => {
-        setText({ ...text, name: e.target.value });
-    };
-    const textareaChange = (e) => {
-        setText({ ...text, message: e.target.value });
-    };
-    const sendMessage = (text) => {
-        return new Promise((resolve) => {
-            setTimeout(resolve, 2000);
-        });
+    const handlePositionChange = (e) => {
+        setPosition(e.target.value);
     };
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setStatus('sending');
-        await sendMessage(text);
-        setStatus('sent');
-    }
-
-    const isSending = status === 'sending';
-    const isSent = status === 'sent';
-
-    if (isSent) {
-        return (
-            <>
-                <p>{text.message}</p>
-                <img
-                    src="./images/baseball-7985432_640.jpg"
-                    alt="baseball"
-                ></img>
-                <h1>{text.name}さん応援ありがとうございます！</h1>
-            </>
-        );
-    }
+    const handleBattingOrder = (e) => {
+        setBattingOrder(e.target.value);
+    };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <p>大谷翔平選手に応援メッセージをお願いします！</p>
-            <label>お名前</label>
-            <input
-                disabled={isSending}
-                value={text.name}
-                onChange={inputChange}
-            />
+        <>
+            <p>今日のあなたのポジションと打順を入力してください</p>
+            <label>
+                ポジション
+                <input value={position} onChange={handlePositionChange} />
+            </label>
+
             <br />
-            <textarea
-                disabled={isSending}
-                value={text.message}
-                onChange={textareaChange}
-                placeholder={'メッセージを入力してください'}
-            />
-            <br />
-            <button disabled={isSending} type="submit">
-                メッセージを送る
-            </button>
-            {isSending && <p>Sending...</p>}
-        </form>
+            <label>
+                打順
+                <input value={battingOrder} onChange={handleBattingOrder} />
+            </label>
+            <h3>
+                今日のあなたのポジションは{position}で打順は{battingOrder}
+                番ですね！
+            </h3>
+        </>
     );
 };
 
