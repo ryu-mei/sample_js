@@ -1,23 +1,42 @@
 import { useState } from 'react';
 
 const App = () => {
-    const [playPosition, setPlayPosition] = useState('ピッチャー');
-
-    function handlePositionChange(e) {
-        setPlayPosition(e.target.value);
-    }
-    // console.log(playPosition);
+    const [showB, setShowB] = useState(false);
     return (
         <>
-            <p>今日のあなたのポジションと打順を選択してください</p>
-            <select value={playPosition} onChange={handlePositionChange}>
-                <option value="ピッチャー">ピッチャー</option>
-                <option value="ライト">ライト</option>
-                <option value="レフト">レフト</option>
-            </select>
-            <h3>今日のあなたのポジションは{playPosition}ですね！</h3>
+            <div className="wrapper">
+                <Counter />
+                {showB && <Counter />}
+            </div>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={showB}
+                    onChange={(e) => setShowB(e.target.checked)}
+                />
+                2個目のボックスを追加
+            </label>
         </>
     );
 };
 
 export default App;
+
+function Counter() {
+    const [score, setScore] = useState(0);
+    const [hover, setHover] = useState(false);
+    let className = 'counter';
+    if (hover) {
+        className = 'hover';
+    }
+    return (
+        <div
+            className={`${className} box`}
+            onPointerEnter={() => setHover(true)}
+            onPointerLeave={() => setHover(false)}
+        >
+            <h1>{score}</h1>
+            <button onClick={() => setScore(score + 1)}>追加</button>
+        </div>
+    );
+}
