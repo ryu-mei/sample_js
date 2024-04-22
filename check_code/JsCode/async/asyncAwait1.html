@@ -11,9 +11,9 @@
     <script>
         async function fetchHello() {
             const result = await fetch('https://www.furusato-i.or.jp');
-            return result;    
+            return result;
         }
-
+        
         console.log('開始');
         fetchHello().then( data => {
             console.log('成功しました。');
