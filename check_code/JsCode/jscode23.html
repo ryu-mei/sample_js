@@ -10,11 +10,51 @@
     <h1>コード</h1>
 
     <script>
-      console.log(value1);
-      var value1 = 'Hello world';
-
-      console.log(value2);
-      let value2 = 'Hello world';
+      // #1
+      var value1 = true;
+      var value2 = false;
+      var result = value1 && value2;
+      console.log(result); // false
+      // #2
+      var value1 = 10;
+      var value2 = 0;
+      var result = value1 && value2;
+      console.log(result); // 0
+      // #2
+      var value1 = 0;
+      var value2 = 10;
+      var result = value1 && value2;
+      console.log(result); // 0
+      // #3
+      var value1 = 5;
+      var value2 = 10;
+      var result = value1 && value2;
+      console.log(result); // 10
+      // #3
+      var value1 = 10;
+      var value2 = 5;
+      var result = value1 && value2;
+      console.log(result); // 5
+      // #4
+      var flag = false;
+      var value = flag && 'test';
+      console.log(value); // false
+      // #5
+      var flag = true;
+      var value = flag && 'test';
+      console.log(value); // 'test'
+      // #6
+      var flag1 = true;
+      var flag2 = true;
+      var flag3 = false;
+      var value = flag1 && flag2 && flag3 && 'test';
+      console.log(value); // false
+      // #7
+      var flag1 = true;
+      var flag2 = true;
+      var flag3 = true;
+      var value = flag1 && flag2 && flag3 && 'test';
+      console.log(value); // 'test'
     </script>
   </body>
 </html>
