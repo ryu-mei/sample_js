@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header {
+  width: 100%;
+  background-color: rgb(66, 170, 205);
+  position: relative;
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar_list {
+  display: block;
+  padding: 10px 20px;
+}
+
+.drop_menu_top {
+  position: absolute;
+  display: none;
+  background-color: #38af56;
+  transition: all 0.3s;
+  padding: 5px 20px;
+}
+
+.drop_menu_top.is-active {
+  display: block;
+}
