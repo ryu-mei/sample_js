@@ -21,14 +21,15 @@ const News = () => {
                 <td>{list.date}</td>
                 <td>{list.title}</td>
             </tr>
-
         );
     });
     
     return (
         <>
             <div className="titleNews">News</div>
-            <table>{news}</table>
+            <div>
+                <table>{news}</table>
+            </div>
         </>
     )
 }
