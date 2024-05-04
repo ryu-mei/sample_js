@@ -1,12 +1,19 @@
-import Button from './Button';
+import Avatar from './Avatar';
 
-function App() {
-  return (
-    <>
-      <h1>Hello World</h1>
-      <Button />
-    </>
-  );
+function Card({ children }) {
+  return <div className="card">{children}</div>;
 }
 
-export default App;
+export default function Profile() {
+  return (
+    <Card>
+      <Avatar
+        size={100}
+        person={{
+          name: 'Katsuko Saruhashi',
+          imageId: 'YfeOqp2',
+        }}
+      />
+    </Card>
+  );
+}
