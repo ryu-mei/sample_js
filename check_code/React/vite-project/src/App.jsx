@@ -1,21 +1,16 @@
-function Item({ name, isPacked }) {
-  return (
-    <li className="item">
-      {name}
-      {isPacked && '✔️'}
-    </li>
-  );
-}
+const people = [
+  { id: 0, name: 'Murakami', position: 'third baseman' },
+  { id: 1, name: 'Ohtani', positon: 'pitcher' },
+  { id: 2, name: 'Nootbaar', positon: 'outfielder' },
+  { id: 3, name: 'Yoshida', positon: 'outfielder' },
+  { id: 4, name: 'Imanaga', positon: 'pitcher' },
+];
 
-export default function PackingList() {
-  return (
-    <section>
-      <h1>Salliy Ride's Packing List</h1>
-      <ul>
-        <Item isPacked={true} name="Space suit" />
-        <Item isPacked={true} name="Helmet with a golden leaf" />
-        <Item isPacked={false} name="Photo of Tam" />
-      </ul>
-    </section>
-  );
-}
+const List = () => {
+  const fielder = people.filter((person) => (
+    <li>{person.position === 'pitcher'}</li>
+  ));
+  return <ul>{fielder}</ul>;
+};
+
+export default List;
