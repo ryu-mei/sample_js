@@ -8,7 +8,9 @@ const people = [
 
 const List = () => {
   const fielder = people.filter((person) => person.position === 'pitcher');
-  const pitcher = fielder.map((person) => <li>{person.name}</li>);
+  const pitcher = fielder.map((person) => (
+    <li key={person.id}>{person.name}</li>
+  ));
   return <ul>{pitcher}</ul>;
 };
 
