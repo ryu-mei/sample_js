@@ -1,16 +1,21 @@
 import * as React from 'react';
-import quotes from './quotes.js';
+import inspirations from './inspirations';
 import FancyText from './FancyText';
+import Color from './Color';
 
 const InspirationGenerator = ({ children }) => {
   const [index, setIndex] = React.useState(0);
-  const quote = quotes[index];
-  const next = () => setIndex((index + 1) % quotes.length);
+  const inspiration = inspirations[index];
+  const next = () => setIndex((index + 1) % inspirations.length);
 
   return (
     <>
-      <p>Your inspirational quote is:</p>
-      <FancyText text={quote} />
+      <p>Your inspirational {inspiration.type} is:</p>
+      {inspiration.type === 'quote' ? (
+        <FancyText text={inspiration.value} />
+      ) : (
+        <Color value={inspiration.value} />
+      )}
       <button onClick={next}>Inspire me again</button>
       {children}
     </>
