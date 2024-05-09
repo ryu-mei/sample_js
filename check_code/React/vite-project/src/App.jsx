@@ -10,9 +10,16 @@ const imgSize = css`
 
 const Gallery = () => {
   const [index, setIndex] = useState(0);
+  const [showMore, setShowMore] = useState(false);
+
   const handleClick = () => {
     setIndex(index + 1);
   };
+
+  const handleMoreClick = () => {
+    setShowMore(!showMore);
+  };
+
   let sculpture = sculptureList[index];
   return (
     <>
@@ -23,8 +30,11 @@ const Gallery = () => {
       <p>
         {index + 1} of {sculptureList.length}
       </p>
+      <button onClick={handleMoreClick}>
+        {showMore ? 'Hide details' : 'Show details'}
+      </button>
+      <p>{showMore && sculpture.description}</p>
       <img src={sculpture.url} alt={sculpture.alt} css={imgSize} />
-      <p>{sculpture.description}</p>
     </>
   );
 };
