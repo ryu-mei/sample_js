@@ -7,7 +7,7 @@ const bgBlue = css`
   background: #2196f3;
 `;
 
-const Button = (onClick, children) => {
+const Button = ({ onClick, children }) => {
   return (
     <button
       onClick={(e) => {
