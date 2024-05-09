@@ -1,40 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-const red = css`
-  color: red;
-`;
-const bgBlue = css`
-  background: #2196f3;
+import { useState } from 'react';
+import { sculptureList } from './data';
+
+const imgSize = css`
+  width: 200px;
+  height: 200px;
 `;
 
-const Button = ({ onClick, children }) => {
+const Gallery = () => {
+  const [index, setIndex] = useState(0);
+  const handleClick = () => {
+    setIndex(index + 1);
+  };
+  let sculpture = sculptureList[index];
   return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-    >
-      {children}
-    </button>
+    <>
+      <button onClick={handleClick}>Next</button>
+      <h1>
+        {sculptureList.name} by {sculpture.artist}
+      </h1>
+      <p>
+        {index + 1} of {sculptureList.length}
+      </p>
+      <img src={sculpture.url} alt={sculpture.alt} css={imgSize} />
+      <p>{sculpture.description}</p>
+    </>
   );
 };
 
-const Toolbar = () => {
-  return (
-    <div
-      className="Toolbar"
-      onClick={() => {
-        alert('you clicked on the toolbar!');
-      }}
-      css={bgBlue}
-    >
-      <Button onClick={() => alert('playing')} css={red}>
-        play movie
-      </Button>
-      <Button onClick={() => alert('uploading')}>upload image</Button>
-    </div>
-  );
-};
-
-export default Toolbar;
+export default Gallery;
