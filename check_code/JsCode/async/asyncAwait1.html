@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>コードチェック</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>コードのチェックです。</h1>
     <script>
-        async function fetchHello() {
-            const result = await fetch('https://www.furusato-i.or.jp');
-            return result;    
-        }
+      console.log('コードが読み込まれる順番');
+      function hello() {
+        console.log('hello関数は1番目');
+      }
 
-        console.log('開始');
-        fetchHello().then( data => {
-            console.log('成功しました。');
-        }, err => {
-            console.log('失敗しました。');
-        })
-        console.log('終了');
+      const prom = new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('3番目に呼ばれる');
+          resolve();
+        }, 2000);
+      }).then(() => {
+        console.log('3番目が呼ばれた後に呼ばれる');
+      });
+
+      async function asyncHello() {
+        const result = await prom;
+        return result;
+      }
+
+      hello();
+      asyncHello();
+      console.log('2番目に呼ばれる');
     </script>
-</body>
+  </body>
 </html>

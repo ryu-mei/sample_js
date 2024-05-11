@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <label for="name">名前</label>
-        <input type="text" id="name" name="name">
-        <button class="btn">btn</button>
-    </div>
-    <script>
-        const btn = document.querySelector(".btn");
-        const text = document.querySelector('#name');
-        // const emptyVal = "";
-        // const empty = emptyVal ? "入力されていません" : "入力されました";
-        // console.log(empty);
-        // if("") {
-        //     console.log("true");
-        // } else {
-        //     console.log("false");
-        // }
-        function btnClick() {
-            const tTextValue = typeof(text.value);
-            if(!text.value) {
-                console.log("入力されていません");
-            } else {
-                console.log(text.value);
-            }
-        }
-        btn.addEventListener('click', btnClick);
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>カフェ</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-logo"><a href="#">Logo</a></div>
+            <ul class="header-nav">
+                <li class="news"><a href="#">NEWS</a></li>
+                <li class="menu"><a href="#">MENU</a></li>
+                <li class="contact"><a href="#">CONTACT</a></li>
+            </ul>
+        </div>
+        <section id="main" class="main">
+            <div class="main-content">
+                <h1 class="main-title">Lorem ipsum dolor sit.</h1>
+            </div>
+        </section>
+        <section>
+            <ul class="wrapper">
+                <li class="color1">背景1</li>
+                <li class="color2">背景2</li>
+                <li class="color3">背景3</li>
+                <li class="color4">背景4</li>
+                <li class="color5">背景5</li>
+            </ul>
+        </section>
+    </body>
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 
 export default function Main() {
@@ -11,4 +12,14 @@ export default function Main() {
         <button onClick={toggleSwich}>クリック</button>
       </>
     )
+=======
+import LikeButton from "./button";
+
+export default function Main() {
+    return (
+      <header className="App-header">
+        <LikeButton />
+      </header>
+    );
+>>>>>>> 53c94dd5c30692dd6afe5ce3df832e6d8cfef31b
 }
