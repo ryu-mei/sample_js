@@ -1,12 +1,14 @@
+import { useState } from "react";
+
 export default function Main() {
-    const clickHandler = () => {
-      console.log('クリックされました。');
+    const [isOn, setIsOn] = useState(false);
+    const toggleSwich = () => {
+      setIsOn(!isOn);
     }
     return (
       <>
-        <h1>hello</h1>
-        <p>hello world</p>
-        <button onClick={clickHandler}>クリック</button>
+        <h1>{isOn ? "on" : "off"}</h1>
+        <button onClick={toggleSwich}>クリック</button>
       </>
     )
 }
