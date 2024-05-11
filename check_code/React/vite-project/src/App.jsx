@@ -1,42 +1,43 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { sculptureList } from './data';
 
-const imgSize = css`
-  width: 200px;
-  height: 200px;
-`;
+const Form = () => {
+  const [person, setPerson] = useState({
+    firstname: 'barbara',
+    lastname: 'hepworth',
+    email: 'bhepworth@gmail.com',
+  });
 
-const Gallery = () => {
-  const [index, setIndex] = useState(0);
-  const [showMore, setShowMore] = useState(false);
-
-  const handleClick = () => {
-    setIndex(index + 1);
+  const handleFirstNameChange = (e) => {
+    setPerson({ ...person, firstname: e.target.value });
   };
 
-  const handleMoreClick = () => {
-    setShowMore(!showMore);
+  const handleLastNameChange = (e) => {
+    setPerson({ ...person, lastname: e.target.value });
   };
 
-  let sculpture = sculptureList[index];
+  const handleEmailChange = (e) => {
+    setPerson({ ...person, email: e.target.value });
+  };
+
   return (
     <>
-      <button onClick={handleClick}>Next</button>
-      <h1>
-        {sculptureList.name} by {sculpture.artist}
-      </h1>
-      <p>
-        {index + 1} of {sculptureList.length}
-      </p>
-      <button onClick={handleMoreClick}>
-        {showMore ? 'Hide details' : 'Show details'}
-      </button>
-      <p>{showMore && sculpture.description}</p>
-      <img src={sculpture.url} alt={sculpture.alt} css={imgSize} />
+      <label>
+        firstname:
+        <input value={person.firstname} onChange={handleFirstNameChange} />
+      </label>
+      <label>
+        lastname:
+        <input value={person.lastname} onChange={handleLastNameChange} />
+      </label>
+      <label>
+        email:
+        <input value={person.email} onChange={handleEmailChange} />
+      </label>
+      <p>{`${person.firstname} ${person.lastname} ${person.email}`}</p>
     </>
   );
 };
 
-export default Gallery;
+export default Form;
