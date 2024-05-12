@@ -1,71 +1,39 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { useRef } from 'react';
 
-const Form = () => {
-  const [person, setPerson] = useState({
-    name: 'Niki de Saint Phalle',
-    artwork: {
-      title: 'Blue Nana',
-      city: 'Hanburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
-    },
-    email: 'bhepworth@gmail.com',
-  });
+const Stopwatch = () => {
+  const [startTime, setStartTime] = useState(null);
+  const [now, setNow] = useState(null);
+  const intervalRef = useRef(null);
 
-  const handleNameChange = (e) => {
-    setPerson({ ...person, name: e.target.value });
+  const handleStart = () => {
+    setStartTime(Date.now());
+    setNow(Date.now());
+
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setNow(Date.now());
+    }, 10);
   };
 
-  const handleTitleChange = (e) => {
-    setPerson({
-      ...person,
-      artwork: { ...person.artwork, title: e.target.value },
-    });
+  const handleStop = () => {
+    clearInterval(intervalRef.current);
   };
 
-  const handleCityChange = (e) => {
-    setPerson({
-      ...person,
-      artwork: { ...person.artwork, city: e.target.value },
-    });
-  };
-
-  const handleImageChange = (e) => {
-    setPerson({
-      ...person,
-      artwork: { ...person.artwork, city: e.target.value },
-    });
-  };
+  let secondsPassed = 0;
+  if (startTime != null && now != null) {
+    secondsPassed = (now - startTime) / 1000;
+  }
 
   return (
     <>
-      <label>
-        name:
-        <input value={person.name} onChange={handleNameChange} />
-      </label>
-      <label>
-        Title:
-        <input value={person.artwork.title} onChange={handleTitleChange} />
-      </label>
-      <label>
-        City:
-        <input value={person.artwork.city} onChange={handleCityChange} />
-      </label>
-      <label>
-        Image:
-        <input value={person.artwork.image} onChange={handleImageChange} />
-      </label>
-      <p>
-        <i>{person.artwork.title}</i>
-        {'by'}
-        {person.name}
-        <br />
-        (located in {person.artwork.city})
-        <img src={person.artwork.image} alt={person.artwork.title} />
-      </p>
+      <h1>Time passed: {secondsPassed.toFixed(3)}</h1>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleStop}>Stop</button>
     </>
   );
 };
 
-export default Form;
+export default Stopwatch;
