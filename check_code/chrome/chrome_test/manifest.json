@@ -1,0 +1,12 @@
+{
+  "name": "sample1_name",
+  "description": "sample1_description",
+  "version": "0.0.0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "sample1.png"
+  },
+  "action": {
+    "default_popup": "sample1.html"
+  }
+}
