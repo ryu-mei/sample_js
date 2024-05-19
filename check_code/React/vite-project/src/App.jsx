@@ -1,19 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { forwardRef, useRef } from 'react';
-
-const MyInput = forwardRef((props, ref) => {
-  return <input {...props} ref={ref} />;
-});
+import { useRef } from 'react';
 
 const Form = () => {
   const inputRef = useRef(null);
-  const handleClick = () => {
+
+  function handleClick() {
     inputRef.current.focus();
-  };
+  }
+
   return (
     <>
-      <MyInput ref={inputRef} />
+      <input ref={inputRef} />
       <button onClick={handleClick}>Focus the input</button>
     </>
   );
