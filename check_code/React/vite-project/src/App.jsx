@@ -2,19 +2,74 @@
 import { css } from '@emotion/react';
 import { useRef } from 'react';
 
-const Form = () => {
-  const inputRef = useRef(null);
+const displayflex = css`
+  display: flex;
+  list-style: none;
+`;
 
-  function handleClick() {
-    inputRef.current.focus();
+const CatFriends = () => {
+  const firstCatRef = useRef(null);
+  const secondCatRef = useRef(null);
+  const thirdCatRef = useRef(null);
+
+  function handleScrollToFirstCat() {
+    firstCatRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }
+
+  function handleScrollToSecondCat() {
+    secondCatRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }
+
+  function handleScrollToThirdCat() {
+    thirdCatRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
   }
 
   return (
     <>
-      <input ref={inputRef} />
-      <button onClick={handleClick}>Focus the input</button>
+      <nav>
+        <button onClick={handleScrollToFirstCat}>猫ちゃん</button>
+        <button onClick={handleScrollToSecondCat}>猫ちゃん</button>
+        <button onClick={handleScrollToThirdCat}>猫ちゃん</button>
+      </nav>
+      <div>
+        <ul css={displayflex}>
+          <li>
+            <img
+              src="https://placekitten.com/g/200/200"
+              alt="猫ちゃん"
+              ref={firstCatRef}
+            />
+          </li>
+          <li>
+            <img
+              src="https://placekitten.com/g/200/200"
+              alt="猫ちゃん"
+              ref={secondCatRef}
+            />
+          </li>
+          <li>
+            <img
+              src="https://placekitten.com/g/200/200"
+              alt="猫ちゃん"
+              ref={thirdCatRef}
+            />
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
 
-export default Form;
+export default CatFriends;
