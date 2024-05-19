@@ -1,22 +1,30 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { forwardRef, useRef } from 'react';
+import { useState, useRef } from 'react';
 
-const MyInput = forwardRef((props, ref) => {
-  return <input {...props} ref={ref} />;
-});
+const Counter = () => {
+  const [show, setShow] = useState(true);
+  const ref = useRef(null);
 
-const Form = () => {
-  const inputRef = useRef(null);
-  function handleClick() {
-    inputRef.current.focus();
-  }
   return (
-    <>
-      <MyInput ref={inputRef} />
-      <button onClick={handleClick}>Focus the input</button>
-    </>
+    <div>
+      <button
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        Toggle with setState
+      </button>
+      <button
+        onClick={() => {
+          ref.current.remove();
+        }}
+      >
+        Remove from the Dom
+      </button>
+      {show && <p ref={ref}>Hello world</p>}
+    </div>
   );
 };
 
-export default Form;
+export default Counter;
