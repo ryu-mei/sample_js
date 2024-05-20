@@ -1,30 +1,40 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const Counter = () => {
-  const [show, setShow] = useState(true);
+const videoStyle = css`
+  width: 150px;
+  height: 200px;
+`;
+
+const VideoPlayer = ({ src, isPlaying }) => {
   const ref = useRef(null);
+  useEffect(() => {
+    if (isPlaying) {
+      ref.current.play();
+    } else {
+      ref.current.pause();
+    }
+  });
+
+  return <video ref={ref} src={src} loop playsInline />;
+};
+
+const App = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        Toggle with setState
+    <>
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {isPlaying ? 'pause' : 'play'}
       </button>
-      <button
-        onClick={() => {
-          ref.current.remove();
-        }}
-      >
-        Remove from the Dom
-      </button>
-      {show && <p ref={ref}>Hello world</p>}
-    </div>
+      <VideoPlayer
+        css={videoStyle}
+        isPlaying={isPlaying}
+        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+      />
+    </>
   );
 };
 
-export default Counter;
+export default App;
