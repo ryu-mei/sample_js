@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import { useState, useRef, useEffect } from 'react';
 
 const videoStyle = css`
-  width: 150px;
-  height: 200px;
+  width: 200px;
+  height: 250px;
 `;
 
 const VideoPlayer = ({ src, isPlaying }) => {
@@ -17,7 +17,7 @@ const VideoPlayer = ({ src, isPlaying }) => {
     }
   });
 
-  return <video ref={ref} src={src} loop playsInline />;
+  return <video ref={ref} src={src} css={videoStyle} loop playsInline />;
 };
 
 const App = () => {
@@ -29,7 +29,6 @@ const App = () => {
         {isPlaying ? 'pause' : 'play'}
       </button>
       <VideoPlayer
-        css={videoStyle}
         isPlaying={isPlaying}
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
       />
