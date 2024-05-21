@@ -7,24 +7,30 @@ const videoStyle = css`
   height: 250px;
 `;
 
-const VideoPlayer = ({ src, isPlaying }) => {
+const VideoPlayer = ({ src, isPlaying, css }) => {
   const ref = useRef(null);
   useEffect(() => {
+    console.count('useEffect');
     if (isPlaying) {
       ref.current.play();
     } else {
       ref.current.pause();
     }
-  });
-
-  return <video ref={ref} src={src} css={videoStyle} loop playsInline />;
+  }, [isPlaying]);
+  console.count('レンダリング');
+  return (
+    <video ref={ref} src={src} css={{ ...videoStyle, css }} loop playsInline />
+  );
 };
 
 const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [text, setText] = useState('');
 
   return (
     <>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+      <br />
       <button onClick={() => setIsPlaying(!isPlaying)}>
         {isPlaying ? 'pause' : 'play'}
       </button>
