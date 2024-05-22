@@ -2,11 +2,12 @@
 import { css } from '@emotion/react';
 import { useState, useRef, useEffect } from 'react';
 
-const videoStyleHeight = css`
-  height: 120px;
+const videoStyle = css`
+  width: 200px;
+  height: 150px;
 `;
 
-const videoStyleWidth = css`
+const videoPlayerStyle = css`
   width: 300px;
 `;
 
@@ -24,7 +25,7 @@ const VideoPlayer = ({ src, isPlaying, css }) => {
     <video
       ref={ref}
       src={src}
-      css={{ ...videoStyleHeight, ...css }}
+      css={{ ...videoStyle, ...css }}
       loop
       playsInline
     />
@@ -41,7 +42,7 @@ const App = () => {
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
-        css={videoStyleWidth}
+        css={videoPlayerStyle}
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
       />
     </>
