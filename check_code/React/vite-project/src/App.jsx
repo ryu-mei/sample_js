@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState, useRef, useEffect } from 'react';
+import Button from '@mui/material/Button';
 
 const videoStyle = css`
   width: 200px;
@@ -37,9 +38,9 @@ const App = () => {
 
   return (
     <>
-      <button onClick={() => setIsPlaying(!isPlaying)}>
+      <Button variant="contained" onClick={() => setIsPlaying(!isPlaying)}>
         {isPlaying ? 'pause' : 'play'}
-      </button>
+      </Button>
       <VideoPlayer
         isPlaying={isPlaying}
         emotionCss={videoPlayerStyle}
