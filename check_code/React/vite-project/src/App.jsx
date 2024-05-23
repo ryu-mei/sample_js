@@ -11,7 +11,7 @@ const videoPlayerStyle = css`
   width: 300px;
 `;
 
-const VideoPlayer = ({ src, isPlaying, css }) => {
+const VideoPlayer = ({ src, isPlaying, emotionCss }) => {
   const ref = useRef(null);
   useEffect(() => {
     if (isPlaying) {
@@ -20,12 +20,12 @@ const VideoPlayer = ({ src, isPlaying, css }) => {
       ref.current.pause();
     }
   }, [isPlaying]);
-  console.log(css);
+  console.log(videoStyle, emotionCss, { ...videoStyle, ...emotionCss });
   return (
     <video
       ref={ref}
       src={src}
-      css={{ ...videoStyle, ...css }}
+      css={{ ...videoStyle, ...emotionCss }}
       loop
       playsInline
     />
@@ -42,7 +42,7 @@ const App = () => {
       </button>
       <VideoPlayer
         isPlaying={isPlaying}
-        css={videoPlayerStyle}
+        emotionCss={videoPlayerStyle}
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
       />
     </>
