@@ -1,51 +1,42 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { createConnection } from './chat';
 import Button from '@mui/material/Button';
 
-const videoStyle = css`
-  width: 200px;
-  height: 150px;
-`;
-
-const videoPlayerStyle = css`
-  width: 300px;
-`;
-
-const VideoPlayer = ({ src, isPlaying, emotionCss }) => {
-  const ref = useRef(null);
+const Playground = () => {
+  const [text, setText] = useState('a');
   useEffect(() => {
-    if (isPlaying) {
-      ref.current.play();
-    } else {
-      ref.current.pause();
-    }
-  }, [isPlaying]);
-  console.log(videoStyle, emotionCss, { ...videoStyle, ...emotionCss });
+    const onTimeout = () => {
+      console.log('⏰' + text);
+    };
+    console.log(`🔵 Schedule ${text} log`);
+    const timeoutId = setTimeout(onTimeout, 3000);
+    return () => {
+      console.log(`🟡 Cancel ${text} log`);
+      clearTimeout(timeoutId);
+    };
+  }, [text]);
   return (
-    <video
-      ref={ref}
-      src={src}
-      css={{ ...videoStyle, ...emotionCss }}
-      loop
-      playsInline
-    />
+    <>
+      <label>
+        What to log:{' '}
+        <input value={text} onChange={(e) => setText(e.target.value)} />
+      </label>
+      <h1>{text}</h1>
+    </>
   );
 };
 
 const App = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
+  const [show, setShow] = useState(false);
   return (
     <>
-      <Button variant="contained" onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'pause' : 'play'}
+      <Button variant="outlined" onClick={() => setShow(!show)}>
+        {show ? 'Unmount' : 'Mount'} the component
       </Button>
-      <VideoPlayer
-        isPlaying={isPlaying}
-        emotionCss={videoPlayerStyle}
-        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-      />
+      {show && <hr />}
+      {show && <Playground />}
     </>
   );
 };

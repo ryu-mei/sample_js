@@ -1,0 +1,15 @@
+{
+  "name": "mercari-serch-price",
+  "description": "Amazonや楽天の商品の最低価格を表示します。",
+  "version": "0.0.0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "bunseki.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://jp.mercari.com/item/*"],
+      "js": ["test.js"]
+    }
+  ]
+}
