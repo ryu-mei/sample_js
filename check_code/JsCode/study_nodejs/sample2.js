@@ -16,58 +16,14 @@ function foo() {
   });
 }
 
+const array = [100, 300, 400, 200];
+console.log('start');
 (async () => {
-  // console.log('start then mechod chain 1');
-  // await (() =>
-  //   new Promise((resolve) => {
-  //     wait(waitTimes[0], 'then mechod chain 1')
-  //       .then(() => wait(waitTimes[1], 'then mechod chain 1'))
-  //       .then(() => wait(waitTimes[2], 'then mechod chain 1'))
-  //       .then(() => wait(waitTimes[3], 'then mechod chain 1'))
-  //       .then(() => wait(waitTimes[4], 'then mechod chain 1'))
-  //       .then(() => {
-  //         resolve();
-  //       });
-  //   }))();
-  // console.log('end then mechod chain 1');
-  // //
-  // console.log('start then mechod chain 2');
-  // await (() =>
-  //   new Promise((resolve) => {
-  //     wait(waitTimes[0], 'then mechod chain 2')
-  //       .then(() => {
-  //         wait(waitTimes[1], 'then mechod chain 2');
-  //       })
-  //       .then(() => {
-  //         wait(waitTimes[2], 'then mechod chain 2');
-  //       })
-  //       .then(() => {
-  //         wait(waitTimes[3], 'then mechod chain 2');
-  //       })
-  //       .then(() => {
-  //         wait(waitTimes[4], 'then mechod chain 2');
-  //       })
-  //       .then(() => {
-  //         resolve();
-  //       });
-  //   }))();
-  // console.log('end then mechod chain 2');
-  // await wait(2000, 'end wait');
-  //
-
-  console.log('start then mechod chain 3');
-  await (() =>
-    new Promise((resolve) => {
-      wait(waitTimes[0], 'then mechod chain 3')
-        .then(wait(waitTimes[1], 'then mechod chain 3'))
-        .then(wait(waitTimes[2], 'then mechod chain 3'))
-        .then(wait(waitTimes[3], 'then mechod chain 3'))
-        .then(wait(waitTimes[4], 'then mechod chain 3'))
-        .then(() => {
-          resolve();
-        });
-    }))();
-  console.log('end then mechod chain 3');
-  await wait(2000, 'end wait');
-  //
+  await Promise.all(
+    array.map((arr) => {
+      return wait(arr, 'promise.all 2');
+    })
+  );
+  console.log('waited');
 })();
+console.log('end');
