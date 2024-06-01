@@ -7,6 +7,14 @@ let regions;
 // 都道府県
 let prefectures;
 
+const updatePrefSelectbox = (prefCodes) => {
+  for (const prefCode of prefCodes) {
+    const pref = prefectures[prefCode];
+    let option = new Option(pref.name, prefCode);
+    prefectureSelect.options.add(option);
+  }
+};
+
 (async () => {
   const response = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -16,6 +24,9 @@ let prefectures;
 
   regions = json.centers;
   prefectures = json.offices;
+  city10 = json.class10s;
+  city15 = json.class15s;
+  city20 = json.class20s;
 
   // const officesObj = Object.values(offices);
   // console.log(officesObj);
@@ -33,15 +44,7 @@ let prefectures;
     selectedRegionCode,
   });
 
-  for (const prefCode of Object.keys(prefectures)) {
-    if (!regions[selectedRegionCode].children.includes(prefCode)) {
-      continue;
-    }
-    console.log(`jscode_select2.html 47`, { selectedRegionCode });
-    const pref = prefectures[prefCode];
-    let option = new Option(pref.name, prefCode);
-    prefectureSelect.options.add(option);
-  }
+  updatePrefSelectbox(regions[selectedRegionCode].children);
 })();
 
 const changeRegion = () => {
@@ -53,11 +56,8 @@ const changeRegion = () => {
 
   prefectureSelect.innerHTML = '';
 
-  if (selectedRegion) {
-    for (const prefCode of selectedRegion.children) {
-      const pref = prefectures[prefCode];
-      let option = new Option(pref.name, prefCode);
-      prefectureSelect.options.add(option);
-    }
+  if (!selectedRegion) {
+    return;
   }
+  updatePrefSelectbox(selectedRegion.children);
 };
