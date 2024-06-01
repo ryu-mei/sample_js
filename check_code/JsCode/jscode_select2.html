@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>コードチェック</title>
+  </head>
+  <body>
+    <h1>都道府県と市町村の選択</h1>
+
+    <select id="region" onchange="changePrefecture()"></select>
+    <select id="prefecture"></select>
+    <script>
+      let regionSelect = document.querySelector('#region');
+      let prefectureSelect = document.querySelector('#prefecture');
+
+      (async () => {
+        const response = await fetch(
+          `https://www.jma.go.jp/bosai/common/const/area.json`
+        );
+        const json = await response.json();
+        // 地域
+        const centers = json.centers;
+        // 都道府県
+        const offices = json.offices;
+        const officesObj = Object.values(offices);
+        console.log(officesObj);
+        for (const center of Object.keys(centers)) {
+          const centerObj = centers[center];
+          let option = new Option(centerObj.name, center);
+          regionSelect.options.add(option);
+        }
+
+        (changePrefecture = () => {
+          const selectedRegionCode =
+            regionSelect.options[regionSelect.selectedIndex].value;
+          console.log(selectedRegionCode);
+
+          const selectedRegion = centers[selectedRegionCode];
+
+          prefectureSelect.innerHTML = '';
+
+          if (selectedRegion) {
+            for (const regionCode of selectedRegion.children) {
+              let option = new Option(officesObj.name, regionCode);
+              prefectureSelect.options.add(option);
+            }
+          }
+        })();
+      })();
+    </script>
+  </body>
+</html>

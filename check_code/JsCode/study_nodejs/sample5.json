@@ -1,0 +1,55 @@
+{
+  "centers": {
+    "010200": {
+      "name": "東北地方",
+      "enName": "Tohoku",
+      "officeName": "仙台管区気象台",
+      "children": ["020000", "030000", "040000", "050000", "060000", "070000"]
+    }
+  }
+}
+{
+  "offices": 
+  "020000": {
+    "name": "青森県",
+    "enName": "Aomori",
+    "officeName": "青森地方気象台",
+    "parent": "010200",
+    "children": ["020010", "020020", "020030"]
+  },
+  "030000": {
+    "name": "岩手県",
+    "enName": "Iwate",
+    "officeName": "盛岡地方気象台",
+    "parent": "010200",
+    "children": ["030010", "030020", "030030"]
+  },
+  "040000": {
+    "name": "宮城県",
+    "enName": "Miyagi",
+    "officeName": "仙台管区気象台",
+    "parent": "010200",
+    "children": ["040010", "040020"]
+  },
+  "050000": {
+    "name": "秋田県",
+    "enName": "Akita",
+    "officeName": "秋田地方気象台",
+    "parent": "010200",
+    "children": ["050010", "050020"]
+  },
+  "060000": {
+    "name": "山形県",
+    "enName": "Yamagata",
+    "officeName": "山形地方気象台",
+    "parent": "010200",
+    "children": ["060010", "060020", "060030", "060040"]
+  },
+  "070000": {
+    "name": "福島県",
+    "enName": "Fukushima",
+    "officeName": "福島地方気象台",
+    "parent": "010200",
+    "children": ["070010", "070020", "070030"]
+  },
+}

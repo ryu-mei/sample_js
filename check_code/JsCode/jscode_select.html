@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>コードチェック</title>
+  </head>
+  <body>
+    <h1>都道府県と市町村の選択</h1>
+    <select id="prefecture" onchange="changeCity()">
+      <option value="東京都">東京都</option>
+      <option value="大阪府">大阪府</option>
+    </select>
+    <select id="city"></select>
+    <script>
+      let cities = {
+        東京都: ['新宿区', '渋谷区', '台東区'],
+        大阪府: ['大阪市北区', '大阪市中央区', '大阪市福島区'],
+      };
+
+      // let products = {
+      //   apple: ['iphone', 'ipad', 'mac'],
+      //   google: ['pixel', 'pixel watch', 'google nest'],
+      // };
+
+      // let productList = products['apple'];
+      // console.log(productList);
+
+      const changeCity = () => {
+        let prefectureSelect = document.querySelector('#prefecture');
+        let citySelect = document.querySelector('#city');
+        let selectedPrefecture =
+          prefectureSelect.options[prefectureSelect.selectedIndex].value;
+
+        // console.log(prefectureSelect, prefectureSelect.options);
+        // console.log(prefectureSelect.selectedIndex);
+
+        // citySelectは#city
+        // while (citySelect.options.length) {
+        //   citySelect.remove(0);
+        // }
+        citySelect.innerHTML = '';
+
+        // 市区町村
+        let cityList = cities[selectedPrefecture];
+        // console.log(cityList);
+        // option要素を追加 #cityに配列を追加する
+        if (cityList) {
+          cityList.forEach((city) => {
+            let option = new Option(city, city);
+            citySelect.options.add(option);
+          });
+        }
+      };
+      changeCity();
+    </script>
+  </body>
+</html>
