@@ -9,46 +9,72 @@
   <body>
     <h1>都道府県と市町村の選択</h1>
 
-    <select id="region" onchange="changePrefecture()"></select>
+    <select id="region" onchange="changeRegion()"></select>
     <select id="prefecture"></select>
     <script>
       let regionSelect = document.querySelector('#region');
       let prefectureSelect = document.querySelector('#prefecture');
+
+      // 地域
+      let regions;
+
+      // 都道府県
+      let prefectures;
 
       (async () => {
         const response = await fetch(
           `https://www.jma.go.jp/bosai/common/const/area.json`
         );
         const json = await response.json();
-        // 地域
-        const centers = json.centers;
-        // 都道府県
-        const offices = json.offices;
-        const officesObj = Object.values(offices);
-        console.log(officesObj);
-        for (const center of Object.keys(centers)) {
-          const centerObj = centers[center];
-          let option = new Option(centerObj.name, center);
+        console.log({ json });
+
+        regions = json.centers;
+        prefectures = json.offices;
+
+        // const officesObj = Object.values(offices);
+        // console.log(officesObj);
+
+        // 地域のセレクトボックス
+        for (const regionCode of Object.keys(regions)) {
+          const region = regions[regionCode];
+          let option = new Option(region.name, regionCode);
           regionSelect.options.add(option);
         }
 
-        (changePrefecture = () => {
-          const selectedRegionCode =
-            regionSelect.options[regionSelect.selectedIndex].value;
-          console.log(selectedRegionCode);
+        // 都道府県のセレクトボックス
+        const selectedRegionCode = regionSelect.options[0].value;
+        console.log(`jscode_select2.html 43`, regionSelect.options, {
+          selectedRegionCode,
+        });
 
-          const selectedRegion = centers[selectedRegionCode];
-
-          prefectureSelect.innerHTML = '';
-
-          if (selectedRegion) {
-            for (const regionCode of selectedRegion.children) {
-              let option = new Option(officesObj.name, regionCode);
-              prefectureSelect.options.add(option);
-            }
+        for (const prefCode of Object.keys(prefectures)) {
+          if (!regions[selectedRegionCode].children.includes(prefCode)) {
+            continue;
           }
-        })();
+          console.log(`jscode_select2.html 47`, { selectedRegionCode });
+          const pref = prefectures[prefCode];
+          let option = new Option(pref.name, prefCode);
+          prefectureSelect.options.add(option);
+        }
       })();
+
+      const changeRegion = () => {
+        const selectedRegionCode =
+          regionSelect.options[regionSelect.selectedIndex].value;
+        console.log(selectedRegionCode);
+
+        const selectedRegion = regions[selectedRegionCode];
+
+        prefectureSelect.innerHTML = '';
+
+        if (selectedRegion) {
+          for (const prefCode of selectedRegion.children) {
+            const pref = prefectures[prefCode];
+            let option = new Option(pref.name, prefCode);
+            prefectureSelect.options.add(option);
+          }
+        }
+      };
     </script>
   </body>
 </html>
