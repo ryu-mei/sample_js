@@ -57,11 +57,8 @@
 data = {
     "region" : [
       "name": "東北地方"
-      :["prefecture": [{
+      : ["prefecture": [{
         "name": "福島県",}]],
-    
-    ]
-
     ]
 
   

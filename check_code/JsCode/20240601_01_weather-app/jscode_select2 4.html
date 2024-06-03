@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>コードチェック</title>
+  </head>
+  <body>
+    <h1>都道府県と市町村の選択</h1>
+
+    <select id="region" onchange="changeRegion()"></select>
+    <select id="pref" onchange="changePref()"></select>
+    <select id="class10"></select>
+    <select id="class20"></select>
+    <script>
+      const regionSelect = document.querySelector('#region');
+      const prefSelect = document.querySelector('#pref');
+      const class10Select = document.querySelector('#class10');
+      const class20Select = document.querySelector('#class20');
+
+      let regions; // 地域
+      let prefs; // 都道府県
+      let class10s;
+      let class20s;
+
+      const updatePrefSelectbox = (prefCodes) => {
+        prefSelect.innerHTML = '';
+        for (const prefCode of prefCodes) {
+          const pref = prefs[prefCode];
+          let option = new Option(pref.name, prefCode);
+          prefSelect.options.add(option);
+        }
+      };
+
+      const updateClass10Selectbox = (class10Codes) => {
+        class10Select.innerHTML = '';
+        for (const class10Code of class10Codes) {
+          const city = class10s[class10Code];
+          let option = new Option(city.name, class10Code);
+          class10Select.options.add(option);
+        }
+      };
+
+      const updateClass20Selectbox = (prefCode) => {
+        class20Select.innerHTML = '';
+        const prefCodeShort = prefCode.slice(0, 2);
+        // console.log(`jscode_select2.html 45`, prefCodeShort, class20s);
+
+        for (const class20Code of Object.keys(class20s)) {
+          if (!class20Code.startsWith(prefCodeShort)) {
+            continue;
+          }
+          const city = class20s[class20Code];
+          let option = new Option(city.name, class20Code);
+          class20Select.options.add(option);
+        }
+      };
+
+      (async () => {
+        const response = await fetch(
+          `https://www.jma.go.jp/bosai/common/const/area.json`
+        );
+        const json = await response.json();
+        console.log({ json });
+
+        regions = json.centers;
+        prefs = json.offices;
+        class10s = json.class10s;
+        class20s = json.class20s;
+
+        for (const regionCode of Object.keys(regions)) {
+          const region = regions[regionCode];
+          let option = new Option(region.name, regionCode);
+          regionSelect.options.add(option);
+        }
+
+        const selectedRegionCode = regionSelect.options[0].value;
+        updatePrefSelectbox(regions[selectedRegionCode].children);
+        updateClass10Selectbox(prefs[prefSelect.options[0].value].children);
+        updateClass20Selectbox(prefSelect.options[0].value);
+      })();
+
+      const changeRegion = () => {
+        const selectedRegionCode =
+          regionSelect.options[regionSelect.selectedIndex].value;
+        const selectedRegion = regions[selectedRegionCode];
+        if (!selectedRegion) {
+          return;
+        }
+        updatePrefSelectbox(selectedRegion.children);
+        changePref();
+      };
+
+      const changePref = () => {
+        const selectedPrefCode =
+          prefSelect.options[prefSelect.selectedIndex].value;
+        const selectedPref = prefs[selectedPrefCode];
+        if (!selectedPref) {
+          return;
+        }
+        console.log(selectedPrefCode);
+        updateClass10Selectbox(selectedPref.children);
+        updateClass20Selectbox(selectedPrefCode);
+      };
+    </script>
+  </body>
+</html>

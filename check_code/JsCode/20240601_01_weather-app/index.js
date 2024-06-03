@@ -1,17 +1,44 @@
 let regionSelect = document.querySelector('#region');
-let prefectureSelect = document.querySelector('#prefecture');
+let prefSelect = document.querySelector('#prefecture');
+let class10Select = document.querySelector('#class10');
+let class20Select = document.querySelector('#class20');
 
 // 地域
 let regions;
 
 // 都道府県
-let prefectures;
+let prefs;
+let class10s;
+let class20s;
 
 const updatePrefSelectbox = (prefCodes) => {
+  prefSelect.innerHTML = '';
   for (const prefCode of prefCodes) {
-    const pref = prefectures[prefCode];
+    const pref = prefs[prefCode];
     let option = new Option(pref.name, prefCode);
-    prefectureSelect.options.add(option);
+    prefSelect.options.add(option);
+  }
+};
+
+const updateClass10Selectbox = (class10Codes) => {
+  class10Select.innerHTML = '';
+  for (const class10Code of class10Codes) {
+    const city = class10s[class10Code];
+    let option = new Option(city.name, class10Code);
+    class10Select.options.add(option);
+  }
+};
+
+const updateClass20Selectbox = (prefCode) => {
+  class20Select.innerHTML = '';
+  const prefCodeShort = prefCode.slice(0, 2);
+  for (const class20Code of Object.keys(class20s)) {
+    if (!class20Code.startsWith(prefCodeShort)) {
+      continue;
+    }
+    const city = class20s[class20Code];
+    let option = new Option(city.name, class20Code);
+    class20Select.options.add(option);
   }
 };
 
@@ -23,10 +50,9 @@ const updatePrefSelectbox = (prefCodes) => {
   console.log({ json });
 
   regions = json.centers;
-  prefectures = json.offices;
-  city10 = json.class10s;
-  city15 = json.class15s;
-  city20 = json.class20s;
+  prefs = json.offices;
+  class10s = json.class10s;
+  class20s = json.class20s;
 
   // const officesObj = Object.values(offices);
   // console.log(officesObj);
@@ -40,24 +66,28 @@ const updatePrefSelectbox = (prefCodes) => {
 
   // 都道府県のセレクトボックス
   const selectedRegionCode = regionSelect.options[0].value;
-  console.log(`jscode_select2.html 43`, regionSelect.options, {
-    selectedRegionCode,
-  });
 
   updatePrefSelectbox(regions[selectedRegionCode].children);
+  updateClass10Selectbox(prefs[prefSelect.options[0].value].children);
+  updateClass20Selectbox(prefSelect.options[0].value);
 })();
 
 const changeRegion = () => {
   const selectedRegionCode =
     regionSelect.options[regionSelect.selectedIndex].value;
-  console.log(selectedRegionCode);
 
+  // 地域のコード
   const selectedRegion = regions[selectedRegionCode];
 
-  prefectureSelect.innerHTML = '';
-
-  if (!selectedRegion) {
-    return;
-  }
+  // 地域のコードはchildrenいくつか持つ
   updatePrefSelectbox(selectedRegion.children);
+  // changePref関数を実行
+  changePref();
+};
+
+const changePref = () => {
+  const selectedPrefCode = prefSelect.options[prefSelect.selectedIndex].value;
+  const selectedPref = prefs[selectedPrefCode];
+  updateClass10Selectbox(selectedPref.children);
+  updateClass20Selectbox(selectedPrefCode);
 };
