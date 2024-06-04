@@ -29,6 +29,9 @@ const updateClass10Selectbox = (class10Codes) => {
   }
 };
 
+// 引数 prefCode 011000
+// slice 01
+// class20Codeの値が01から始まる値でなければ(01以外の値は)スキップし、for..of文の中身を続ける
 const updateClass20Selectbox = (prefCode) => {
   class20Select.innerHTML = '';
   const prefCodeShort = prefCode.slice(0, 2);
@@ -66,7 +69,6 @@ const updateClass20Selectbox = (prefCode) => {
 
   // 都道府県のセレクトボックス
   const selectedRegionCode = regionSelect.options[0].value;
-
   updatePrefSelectbox(regions[selectedRegionCode].children);
   updateClass10Selectbox(prefs[prefSelect.options[0].value].children);
   updateClass20Selectbox(prefSelect.options[0].value);
