@@ -10,6 +10,7 @@ let regions;
 let prefs;
 let class10s;
 let class20s;
+let forecastAreas;
 
 const updatePrefSelectbox = (prefCodes) => {
   prefSelect.innerHTML = '';
@@ -29,12 +30,10 @@ const updateClass10Selectbox = (class10Codes) => {
   }
 };
 
-// 引数 prefCode 011000
-// slice 01
-// class20Codeの値が01から始まる値でなければ(01以外の値は)スキップし、for..of文の中身を続ける
 const updateClass20Selectbox = (prefCode) => {
   class20Select.innerHTML = '';
   const prefCodeShort = prefCode.slice(0, 2);
+  // const amedasCode = getAmedasCodeFromClass20Code(class20s)
   for (const class20Code of Object.keys(class20s)) {
     if (!class20Code.startsWith(prefCodeShort)) {
       continue;
@@ -45,20 +44,45 @@ const updateClass20Selectbox = (prefCode) => {
   }
 };
 
+const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
+  for (const [key, value] of Object.entries(forecastAreasJson)) {
+    if (value[0].class20 === class20Code) {
+      return value[0].amedas[0];
+    }
+  }
+};
+
 (async () => {
-  const response = await fetch(
+  const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
   );
-  const json = await response.json();
-  console.log({ json });
+  const res2 = await fetch(
+    `https://www.jma.go.jp/bosai/forecast/const/forecast_area.json`
+  );
+  const res3 = await fetch(
+    `https://www.jma.go.jp/bosai/amedas/const/amedastable.json`
+  );
+  const areaJson = await res1.json();
+  const forecastAreasJson = await res2.json();
+  const amedasesJson = await res3.json();
 
-  regions = json.centers;
-  prefs = json.offices;
-  class10s = json.class10s;
-  class20s = json.class20s;
+  // const amedasCode = getAmedasCodeFromClass20Code(`01211400`, '011000');
+  // console.log(amedasCode, amedasesJson[amedasCode]);
+  console.log({ areaJson });
+  console.log({ forecastAreasJson });
+  // const getAmedasCodeFromClass20Code = (class20Code, forecastArea) => {
+  //   for (const [key, value] of Object.entries(forecastAreasJson)) {
+  //     if (value[0].class20 === class20Code) {
+  //       return console.log(value[0].amedas[0]);
+  //     }
+  //   }
+  // };
 
-  // const officesObj = Object.values(offices);
-  // console.log(officesObj);
+  regions = areaJson.centers;
+  prefs = areaJson.offices;
+  class10s = areaJson.class10s;
+  class20s = areaJson.class20s;
+  forecastAreas = forecastAreasJson;
 
   // 地域のセレクトボックス
   for (const regionCode of Object.keys(regions)) {
@@ -67,6 +91,9 @@ const updateClass20Selectbox = (prefCode) => {
     regionSelect.options.add(option);
   }
 
+  regionSelect.addEventListener('change', changeRegion);
+  prefSelect.addEventListener('change', changePref);
+  class20Select.addEventListener('change', changeCity);
   // 都道府県のセレクトボックス
   const selectedRegionCode = regionSelect.options[0].value;
   updatePrefSelectbox(regions[selectedRegionCode].children);
@@ -88,8 +115,20 @@ const changeRegion = () => {
 };
 
 const changePref = () => {
+  // 選択した件の値を格納
   const selectedPrefCode = prefSelect.options[prefSelect.selectedIndex].value;
   const selectedPref = prefs[selectedPrefCode];
   updateClass10Selectbox(selectedPref.children);
   updateClass20Selectbox(selectedPrefCode);
+};
+
+const changeCity = () => {
+  // console.log(class20Select.options[class20Select.selectedIndex].value);
+  const selectedClass20Code =
+    class20Select.options[class20Select.selectedIndex].value;
+  const amedasCode = getAmedasCodeFromClass20Code(
+    selectedClass20Code,
+    forecastAreas
+  );
+  console.log(amedasCode);
 };
