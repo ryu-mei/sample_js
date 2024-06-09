@@ -2,6 +2,7 @@ let regionSelect = document.querySelector('#region');
 let prefSelect = document.querySelector('#prefecture');
 let class10Select = document.querySelector('#class10');
 let class20Select = document.querySelector('#class20');
+let h1 = document.querySelector('h1');
 
 // 地域
 let regions;
@@ -11,6 +12,8 @@ let prefs;
 let class10s;
 let class20s;
 let forecastAreas;
+let amedases;
+let latestDate = '20240609';
 
 const updatePrefSelectbox = (prefCodes) => {
   prefSelect.innerHTML = '';
@@ -62,6 +65,7 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   const res3 = await fetch(
     `https://www.jma.go.jp/bosai/amedas/const/amedastable.json`
   );
+
   const areaJson = await res1.json();
   const forecastAreasJson = await res2.json();
   const amedasesJson = await res3.json();
@@ -83,6 +87,7 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   class10s = areaJson.class10s;
   class20s = areaJson.class20s;
   forecastAreas = forecastAreasJson;
+  amedases = amedasesJson;
 
   // 地域のセレクトボックス
   for (const regionCode of Object.keys(regions)) {
@@ -115,20 +120,37 @@ const changeRegion = () => {
 };
 
 const changePref = () => {
-  // 選択した件の値を格納
   const selectedPrefCode = prefSelect.options[prefSelect.selectedIndex].value;
   const selectedPref = prefs[selectedPrefCode];
   updateClass10Selectbox(selectedPref.children);
   updateClass20Selectbox(selectedPrefCode);
 };
 
-const changeCity = () => {
-  // console.log(class20Select.options[class20Select.selectedIndex].value);
+const changeCity = async () => {
   const selectedClass20Code =
     class20Select.options[class20Select.selectedIndex].value;
   const amedasCode = getAmedasCodeFromClass20Code(
     selectedClass20Code,
     forecastAreas
   );
-  console.log(amedasCode);
+
+  const isH2element = document.querySelector('h2');
+  if (isH2element) {
+    isH2element.remove();
+  }
+
+  // console.log(amedases[amedasCode]);
+  if (amedasCode !== undefined) {
+    const res4 = await fetch(
+      `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
+    );
+    const resultAmedasData = await res4.json();
+    // console.log('amedasCodeは', amedasCode, amedases[amedasCode]);
+    const amedasPressure = resultAmedasData[20240609060000].pressure[0];
+    const h2 = document.createElement('h2');
+    h2.textContent = `今日の気圧は${amedasPressure}`;
+    h1.insertAdjacentElement('afterend', h2);
+  } else {
+    console.log('気圧データはありません');
+  }
 };
