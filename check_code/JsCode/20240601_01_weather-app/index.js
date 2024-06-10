@@ -5,15 +5,7 @@ let class20Select = document.querySelector('#class20');
 let h1 = document.querySelector('h1');
 
 // 地域
-let regions;
-
-// 都道府県
-let prefs;
-let class10s;
-let class20s;
-let forecastAreas;
-let amedases;
-let latestDate = '20240609';
+let regions, prefs, class10s, class20s, forecastAreas, amedases;
 
 const updatePrefSelectbox = (prefCodes) => {
   prefSelect.innerHTML = '';
@@ -69,18 +61,17 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   const areaJson = await res1.json();
   const forecastAreasJson = await res2.json();
   const amedasesJson = await res3.json();
+  const res4 = await fetch(
+    `https://www.jma.go.jp/bosai/amedas/data/latest_time.txt`
+  );
+  const dateTime = await res4.text();
+  let year = dateTime.substring(0, 4);
+  let month = dateTime.substring(5, 7);
+  let date = dateTime.substring(8, 10);
+  let latestDate = year + month + date;
 
-  // const amedasCode = getAmedasCodeFromClass20Code(`01211400`, '011000');
-  // console.log(amedasCode, amedasesJson[amedasCode]);
   console.log({ areaJson });
   console.log({ forecastAreasJson });
-  // const getAmedasCodeFromClass20Code = (class20Code, forecastArea) => {
-  //   for (const [key, value] of Object.entries(forecastAreasJson)) {
-  //     if (value[0].class20 === class20Code) {
-  //       return console.log(value[0].amedas[0]);
-  //     }
-  //   }
-  // };
 
   regions = areaJson.centers;
   prefs = areaJson.offices;
@@ -141,10 +132,10 @@ const changeCity = async () => {
 
   // console.log(amedases[amedasCode]);
   if (amedasCode !== undefined) {
-    const res4 = await fetch(
+    const res5 = await fetch(
       `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
     );
-    const resultAmedasData = await res4.json();
+    const resultAmedasData = await res5.json();
     // console.log('amedasCodeは', amedasCode, amedases[amedasCode]);
     const amedasPressure = resultAmedasData[20240609060000].pressure[0];
     const h2 = document.createElement('h2');
