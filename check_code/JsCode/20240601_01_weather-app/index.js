@@ -47,6 +47,7 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
+let latestDate;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -68,9 +69,9 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   let year = dateTime.substring(0, 4);
   let month = dateTime.substring(5, 7);
   let date = dateTime.substring(8, 10);
-  let latestDate = year + month + date;
+  latestDate = year + month + date;
 
-  console.log({ areaJson });
+  console.log({ areaJson, latestDate });
   console.log({ forecastAreasJson });
 
   regions = areaJson.centers;
@@ -130,14 +131,19 @@ const changeCity = async () => {
     isH2element.remove();
   }
 
+  console.log(`index.js 133`,
+    amedasCode, latestDate,
+    `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`,
+  );
+
   // console.log(amedases[amedasCode]);
   if (amedasCode !== undefined) {
     const res5 = await fetch(
       `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
     );
     const resultAmedasData = await res5.json();
-    // console.log('amedasCodeは', amedasCode, amedases[amedasCode]);
-    const amedasPressure = resultAmedasData[20240609060000].pressure[0];
+    console.log('amedasCodeは', amedasCode, amedases[amedasCode], resultAmedasData);
+    const amedasPressure = resultAmedasData[Number(`${latestDate}060000`)].pressure[0];
     const h2 = document.createElement('h2');
     h2.textContent = `今日の気圧は${amedasPressure}`;
     h1.insertAdjacentElement('afterend', h2);
