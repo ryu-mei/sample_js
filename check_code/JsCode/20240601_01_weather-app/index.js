@@ -47,7 +47,7 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
-let latestDate;
+let hour, latestDate;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -69,7 +69,10 @@ let latestDate;
   let year = dateTime.substring(0, 4);
   let month = dateTime.substring(5, 7);
   let date = dateTime.substring(8, 10);
-  latestDate = year + month + date;
+  hour = dateTime.substring(11, 13);
+
+  latestDate = year + month + date + hour;
+  console.log(latestDate);
 
   console.log({ areaJson, latestDate });
   console.log({ forecastAreasJson });
@@ -127,26 +130,45 @@ const changeCity = async () => {
   );
 
   const isH2element = document.querySelector('h2');
+  const isPelement = document.querySelector('p');
   if (isH2element) {
     isH2element.remove();
   }
 
-  console.log(`index.js 133`,
-    amedasCode, latestDate,
-    `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`,
+  if (isPelement) {
+    isPelement.remove();
+  }
+
+  console.log(
+    `index.js 133`,
+    amedasCode,
+    latestDate,
+    `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
   );
 
   // console.log(amedases[amedasCode]);
   if (amedasCode !== undefined) {
+    // 全国のアメダス観測所の情報のURL
     const res5 = await fetch(
-      `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
+      `https://www.jma.go.jp/bosai/amedas/data/map/${latestDate}0000.json`
     );
     const resultAmedasData = await res5.json();
-    console.log('amedasCodeは', amedasCode, amedases[amedasCode], resultAmedasData);
-    const amedasPressure = resultAmedasData[Number(`${latestDate}060000`)].pressure[0];
+    console.log(resultAmedasData);
+    console.log(
+      'amedasCodeは',
+      amedasCode,
+      amedases[amedasCode],
+      resultAmedasData
+    );
+    const amedasPressure = resultAmedasData[amedasCode].pressure[0];
+    const amedasTemp = resultAmedasData[amedasCode].temp[0];
     const h2 = document.createElement('h2');
-    h2.textContent = `今日の気圧は${amedasPressure}`;
+    const pElement = document.createElement('p');
+    h2.textContent = `今日の${hour}時の気圧は${amedasPressure}hPaです`;
+    pElement.textContent = `今日の${hour}時の気温は${amedasTemp}です`;
     h1.insertAdjacentElement('afterend', h2);
+    h2.insertAdjacentElement(`afterend`, pElement);
+    console.log(pElement);
   } else {
     console.log('気圧データはありません');
   }
