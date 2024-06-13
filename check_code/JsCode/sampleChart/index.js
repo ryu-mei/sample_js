@@ -1,30 +1,29 @@
-let ctx = document.getElementById('mychart');
-let myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    datasets: [
-      {
-        label: 'Red',
-        data: [2, 3.5, 4, 3, 4.5, 3.5, 4.0],
-        borderColor: '#f88',
-      },
-      {
-        label: 'Green',
-        data: [2, 1.5, 3, 2.5, 3, 4, 3.5],
-        borderColor: '#484',
-      },
-      {
-        label: 'Blue',
-        data: [3, 2.5, 1, 5, 2.5, 3, 2],
-        borderColor: '#48f',
-      },
-    ],
+const chart = Highcharts.chart('container', {
+  chart: {
+    type: 'line',
   },
-  options: {
-    y: {
-      min: 0,
-      max: 10,
+  title: {
+    text: '気温の変化',
+  },
+  xAxis: {
+    title: {
+      text: '横軸',
+    },
+    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
+  },
+  yAxis: {
+    title: {
+      text: '気温',
     },
   },
+  series: [
+    {
+      name: 'Jane',
+      data: [1, 0, 4, 5, 2, 3],
+    },
+    {
+      name: 'John',
+      data: [5, 7, 3, 0, 4, 2],
+    },
+  ],
 });
