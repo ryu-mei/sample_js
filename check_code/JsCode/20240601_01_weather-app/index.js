@@ -72,7 +72,6 @@ let hour, latestDate;
   hour = dateTime.substring(11, 13);
 
   latestDate = year + month + date + hour;
-  console.log(latestDate);
 
   console.log({ areaJson, latestDate });
   console.log({ forecastAreasJson });
@@ -167,9 +166,34 @@ const changeCity = async () => {
     h2.textContent = `今日の${hour}時の気圧は${amedasPressure}hPaです`;
     pElement.textContent = `今日の${hour}時の気温は${amedasTemp}です`;
     h1.insertAdjacentElement('afterend', h2);
-    h2.insertAdjacentElement(`afterend`, pElement);
-    console.log(pElement);
+    h2.insertAdjacentElement('afterend', pElement);
   } else {
     console.log('気圧データはありません');
   }
 };
+
+const chart = Highcharts.chart('container', {
+  chart: {
+    type: 'line',
+  },
+  title: {
+    text: '気温と気圧の変化',
+  },
+  xAxis: {
+    title: {
+      text: '時間',
+    },
+    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${latestDate}`],
+  },
+  yAxis: {
+    title: {
+      text: '気温',
+    },
+  },
+  series: [
+    {
+      name: '気温',
+      data: [1, 0, 4, 5, 2, 3],
+    },
+  ],
+});
