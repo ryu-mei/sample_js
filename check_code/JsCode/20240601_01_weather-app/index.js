@@ -183,7 +183,7 @@ const chart = Highcharts.chart('container', {
     title: {
       text: '時間',
     },
-    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${latestDate}`],
+    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${hour}`],
   },
   yAxis: {
     title: {
