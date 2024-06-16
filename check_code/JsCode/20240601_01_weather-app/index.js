@@ -98,6 +98,8 @@ let hour, latestDate;
   updatePrefSelectbox(regions[selectedRegionCode].children);
   updateClass10Selectbox(prefs[prefSelect.options[0].value].children);
   updateClass20Selectbox(prefSelect.options[0].value);
+
+  updateChart();
 })();
 
 const changeRegion = () => {
@@ -172,28 +174,30 @@ const changeCity = async () => {
   }
 };
 
-const chart = Highcharts.chart('container', {
-  chart: {
-    type: 'line',
-  },
-  title: {
-    text: '気温と気圧の変化',
-  },
-  xAxis: {
+const updateChart = () => {
+  Highcharts.chart('container', {
+    chart: {
+      type: 'line',
+    },
     title: {
-      text: '時間',
+      text: '気温と気圧の変化',
     },
-    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${hour}`],
-  },
-  yAxis: {
-    title: {
-      text: '気温',
+    xAxis: {
+      title: {
+        text: '時間',
+      },
+      categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${hour}`],
     },
-  },
-  series: [
-    {
-      name: '気温',
-      data: [1, 0, 4, 5, 2, 3],
+    yAxis: {
+      title: {
+        text: '気温',
+      },
     },
-  ],
-});
+    series: [
+      {
+        name: '気温',
+        data: [1, 0, 4, 5, 2, 3],
+      },
+    ],
+  });
+};
