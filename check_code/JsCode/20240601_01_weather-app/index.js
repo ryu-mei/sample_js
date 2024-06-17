@@ -47,7 +47,7 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
-let hour, latestDate;
+let hour, hours, latestDatess, amedasTemps;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -72,6 +72,12 @@ let hour, latestDate;
   hour = dateTime.substring(11, 13);
 
   latestDate = year + month + date + hour;
+
+  hours = [];
+  for (let i = 0; i < 5; i++) {
+    hour = hour - 1;
+    hours.unshift(hour);
+  }
 
   console.log({ areaJson, latestDate });
   console.log({ forecastAreasJson });
@@ -154,15 +160,19 @@ const changeCity = async () => {
       `https://www.jma.go.jp/bosai/amedas/data/map/${latestDate}0000.json`
     );
     const resultAmedasData = await res5.json();
-    console.log(resultAmedasData);
-    console.log(
-      'amedasCodeは',
-      amedasCode,
-      amedases[amedasCode],
-      resultAmedasData
-    );
+    // console.log(resultAmedasData);
+    // console.log(
+    //   'amedasCodeは',
+    //   amedasCode,
+    //   amedases[amedasCode],
+    //   resultAmedasData
+    // );
+    
+    amedasTemps = [];
+
+
     const amedasPressure = resultAmedasData[amedasCode].pressure[0];
-    const amedasTemp = resultAmedasData[amedasCode].temp[0];
+    amedasTemp = resultAmedasData[amedasCode].temp[0];
     const h2 = document.createElement('h2');
     const pElement = document.createElement('p');
     h2.textContent = `今日の${hour}時の気圧は${amedasPressure}hPaです`;
@@ -186,7 +196,7 @@ const updateChart = () => {
       title: {
         text: '時間',
       },
-      categories: ['00:00', '01:00', '02:00', '03:00', '04:00', `${hour}`],
+      categories: [...hours],
     },
     yAxis: {
       title: {
@@ -196,7 +206,8 @@ const updateChart = () => {
     series: [
       {
         name: '気温',
-        data: [1, 0, 4, 5, 2, 3],
+        // data: [...amedasTemp],
+        data: [1, 0, 4, 5, 10],
       },
     ],
   });
