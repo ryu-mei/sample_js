@@ -18,7 +18,8 @@ const substringTagBefore = (html, searchTag) => {
       Authorization: 'Bearer your-token-here',
     },
   });
-  console.log(res.json());
+  const data = await res.text();
+  console.log(data);
 
   const addresses = [];
   const infomation = [];
