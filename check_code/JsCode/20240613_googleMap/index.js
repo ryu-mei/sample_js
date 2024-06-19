@@ -1,53 +1,76 @@
 const substringTagAfter = (html, searchTag) => {
   const index = html.indexOf(searchTag);
+  if (index === -1) {
+    return ``;
+  }
   return html.substring(index + searchTag.length);
 };
 
 const substringTagBefore = (html, searchTag) => {
   const index = html.indexOf(searchTag);
+  if (index === -1) {
+    return ``;
+  }
   return html.substring(0, index);
 };
+let map, geocoder;
+let addresses = [ '釜石市千鳥町', '釜石市鈴子町','釜石市大町'];
+let information = [];
 
-(async () => {
-  const res = await fetch('http://localhost:3000/proxy', {
-    method: 'GET',
-    mode: 'cors',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer your-token-here',
-    },
-  });
-  const data = await res.text();
-  console.log(data);
+const fetchData = async () => {
+  const res = await fetch(
+    'https://city.kamaishi.iwate.jp/sq/mobilemail/oshirase.html'
+  );
+  return await res.text();
+};
 
-  const addresses = [];
-  const infomation = [];
-  const lines = htmlPage.split('<HR>'); // テキストを行ごとに分割
+const initMap = async () => {
+  // const htmlPage = await fetchData();
+
+  // lines = htmlPage.split('<HR>'); // テキストを行ごとに分割
   // console.log(lines);
 
-  for (const line of lines) {
-    const addressAfter = substringTagAfter(line, '分頃、');
-    const addressBefore = substringTagBefore(addressAfter, '付近');
-    const infoAfter = substringTagAfter(line, '【防災かまいし広報】');
-    const infoBefore = substringTagBefore(infoAfter, 'ツキノワグマ');
-    addresses.push(addressBefore);
-    infomation.push(infoBefore);
-  }
-})();
+  // for (const line of lines) {
+  //   const addressAfter = substringTagAfter(line, '分頃、');
+  //   const addressBefore = substringTagBefore(addressAfter, '付近');
+  //   const infoAfter = substringTagAfter(line, '【防災かまいし広報】');
+  //   const infoBefore = substringTagBefore(infoAfter, 'ツキノワグマ');
+  //   addresses.push(addressBefore);
+  //   infomation.push(infoBefore);
+  // }
+  // console.log(addresses);
+  // const data = addresses.map((value, index) => {
+  //   return {
+  //     addresses: value,
+  //     infomation: infomation[index],
+  //   };
+  // });
+  // let address = '釜石市中妻町';
+  // information = 'クマ出没エリア';
+  const { Map } = await google.maps.importLibrary('maps');
+  const { Geocoder } = await google.maps.importLibrary('geocoding');
+  geocoder = new google.maps.Geocoder();
+  addresses.forEach((address, index) => {
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      if (status === 'OK') {
+        const marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+          title: 'aaaaaaaa',
+        });
+      } else {
+        console.error(
+          'Geocode was not successful for the following reason: ' + status
+        );
+      }
+    });
+  })
 
-function initMap() {}
-
-function geocodeAddress() {
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById('address').value;
-
-  geocoder.geocode({ address: address }, function (results, status) {
-    if (status === 'OK') {
-      const location = results[0].geometry.location;
-      alert('緯度: ' + location.lat() + ', 経度: ' + location.lng());
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
+  map = new Map(document.querySelector('#map'), {
+    zoom: 14,
+    center: { lat: 39.275377, lng: 141.885771 },
   });
-}
+};
+
+initMap();
+
