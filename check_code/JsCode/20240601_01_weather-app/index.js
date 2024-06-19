@@ -47,6 +47,36 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
+const dateTimeToLatestDate = (dateTimeStr) => {
+  const year = dateTimeStr.substring(0, 4);
+  const month = dateTimeStr.substring(5, 7);
+  const date = dateTimeStr.substring(8, 10);
+  const hour = dateTimeStr.substring(11, 13);
+
+  latestDate = year + month + date + hour;
+  return { hour, latestDate };
+}
+
+const getHours = (hour) => {
+  // console.log(`index.js 76`, hour)
+  const hours = [];
+  for (const i of [0, 1, 2, 3, 4]) {
+    const hourValue = hour - 4 + i
+    if (hourValue < 0) {
+      hours.push(24 + hourValue)
+    } else {
+      hours.push(hourValue)
+    }
+  }
+  // console.log(`index.js 84`, hours)
+
+  // hour = 3;
+  //  hours = [23, 0, 1, 2, 3];
+  // hour = 24;
+  //  hours = [20, 21, 22, 23, 0];
+  return hours;
+}
+
 // let hour, hours, latestDatess, amedasTemps;
 let hour, hours, latestDate;
 (async () => {
@@ -67,29 +97,11 @@ let hour, hours, latestDate;
     `https://www.jma.go.jp/bosai/amedas/data/latest_time.txt`
   );
   const dateTime = await res4.text();
-  let year = dateTime.substring(0, 4);
-  let month = dateTime.substring(5, 7);
-  let date = dateTime.substring(8, 10);
-  hour = dateTime.substring(11, 13);
 
-  latestDate = year + month + date + hour;
+  const { hour, latestDate } = dateTimeToLatestDate(dateTime);
 
-  // console.log(`index.js 76`, hour)
-  hours = [];
-  for (const i of [0, 1, 2, 3, 4]) {
-    const hourValue = hour - 4 + i
-    if (hourValue < 0) {
-      hours.push(24 + hourValue)
-    } else {
-      hours.push(hourValue)
-    }
-  }
-  // console.log(`index.js 84`, hours)
+  hours = getHours(Number(hour));
 
-  // hour = 3;
-  //  hours = [23, 0, 1, 2, 3];
-  // hour = 24;
-  //  hours = [20, 21, 22, 23, 0];
 
   // console.log({ areaJson, latestDate });
   // console.log({ forecastAreasJson });
@@ -170,32 +182,33 @@ const changeCity = async () => {
 
   // console.log(amedases[amedasCode]);
   if (amedasCode !== undefined) {
-    // 全国のアメダス観測所の情報のURL
-    const res5 = await fetch(
-      `https://www.jma.go.jp/bosai/amedas/data/map/${latestDate}0000.json`
-    );
-    const resultAmedasData = await res5.json();
-    // console.log(resultAmedasData);
-    console.log(
-      `index.js 165`,
-      amedasCode,
-      // amedases[amedasCode],
-      resultAmedasData
-    );
-
-    amedasTemps = [];
-
-    const amedasPressure = resultAmedasData[amedasCode].pressure[0];
-    amedasTemp = resultAmedasData[amedasCode].temp[0];
-    const h2 = document.createElement('h2');
-    const pElement = document.createElement('p');
-    h2.textContent = `今日の${hour}時の気圧は${amedasPressure}hPaです`;
-    pElement.textContent = `今日の${hour}時の気温は${amedasTemp}です`;
-    h1.insertAdjacentElement('afterend', h2);
-    h2.insertAdjacentElement('afterend', pElement);
-  } else {
     console.log('気圧データはありません');
+    return;
   }
+
+  // 全国のアメダス観測所の情報のURL
+  const res5 = await fetch(
+    `https://www.jma.go.jp/bosai/amedas/data/map/${latestDate}0000.json`
+  );
+  const resultAmedasData = await res5.json();
+  // console.log(resultAmedasData);
+  console.log(
+    `index.js 165`,
+    amedasCode,
+    // amedases[amedasCode],
+    resultAmedasData
+  );
+
+  amedasTemps = [];
+
+  const amedasPressure = resultAmedasData[amedasCode].pressure[0];
+  amedasTemp = resultAmedasData[amedasCode].temp[0];
+  const h2 = document.createElement('h2');
+  const pElement = document.createElement('p');
+  h2.textContent = `今日の${hour}時の気圧は${amedasPressure}hPaです`;
+  pElement.textContent = `今日の${hour}時の気温は${amedasTemp}です`;
+  h1.insertAdjacentElement('afterend', h2);
+  h2.insertAdjacentElement('afterend', pElement);
 
   updateChart(hours, [0, 0, 0, 0, amedasTemp]);
 };
