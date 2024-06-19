@@ -47,7 +47,8 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
-let hour, hours, latestDatess, amedasTemps;
+// let hour, hours, latestDatess, amedasTemps;
+let hour, hours, latestDate;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -76,7 +77,7 @@ let hour, hours, latestDatess, amedasTemps;
   // console.log(`index.js 76`, hour)
   hours = [];
   for (const i of [0, 1, 2, 3, 4]) {
-    const hourValue = hour - 5 + i
+    const hourValue = hour - 4 + i
     if (hourValue < 0) {
       hours.push(24 + hourValue)
     } else {
@@ -85,13 +86,13 @@ let hour, hours, latestDatess, amedasTemps;
   }
   // console.log(`index.js 84`, hours)
 
-  // hour = 4;
+  // hour = 3;
   //  hours = [23, 0, 1, 2, 3];
-  // hour = 23;
-  //  hours = [18, 19, 20, 21, 22];
+  // hour = 24;
+  //  hours = [20, 21, 22, 23, 0];
 
-  console.log({ areaJson, latestDate });
-  console.log({ forecastAreasJson });
+  // console.log({ areaJson, latestDate });
+  // console.log({ forecastAreasJson });
 
   regions = areaJson.centers;
   prefs = areaJson.offices;
@@ -99,6 +100,8 @@ let hour, hours, latestDatess, amedasTemps;
   class20s = areaJson.class20s;
   forecastAreas = forecastAreasJson;
   amedases = amedasesJson;
+
+  console.log(`index.js 103`, amedasesJson, forecastAreasJson)
 
   // 地域のセレクトボックス
   for (const regionCode of Object.keys(regions)) {
@@ -116,7 +119,8 @@ let hour, hours, latestDatess, amedasTemps;
   updateClass10Selectbox(prefs[prefSelect.options[0].value].children);
   updateClass20Selectbox(prefSelect.options[0].value);
 
-  updateChart();
+  // ダミーデータの送付
+  updateChart(hours, [1, 0, 4, 5, 10]);
 })();
 
 const changeRegion = () => {
@@ -172,15 +176,14 @@ const changeCity = async () => {
     );
     const resultAmedasData = await res5.json();
     // console.log(resultAmedasData);
-    // console.log(
-    //   'amedasCodeは',
-    //   amedasCode,
-    //   amedases[amedasCode],
-    //   resultAmedasData
-    // );
-    
-    amedasTemps = [];
+    console.log(
+      `index.js 165`,
+      amedasCode,
+      // amedases[amedasCode],
+      resultAmedasData
+    );
 
+    amedasTemps = [];
 
     const amedasPressure = resultAmedasData[amedasCode].pressure[0];
     amedasTemp = resultAmedasData[amedasCode].temp[0];
@@ -193,9 +196,11 @@ const changeCity = async () => {
   } else {
     console.log('気圧データはありません');
   }
+
+  updateChart(hours, [0, 0, 0, 0, amedasTemp]);
 };
 
-const updateChart = () => {
+const updateChart = (hours, temps) => {
   Highcharts.chart('container', {
     chart: {
       type: 'line',
@@ -217,8 +222,7 @@ const updateChart = () => {
     series: [
       {
         name: '気温',
-        // data: [...amedasTemp],
-        data: [1, 0, 4, 5, 10],
+        data: temps,
       },
     ],
   });
