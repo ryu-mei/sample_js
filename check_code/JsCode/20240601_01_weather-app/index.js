@@ -207,7 +207,7 @@ const updateChart = () => {
       title: {
         text: '時間',
       },
-      categories: [...hours],
+      categories: hours.map(hour=>`${hour}:00`),
     },
     yAxis: {
       title: {
