@@ -47,14 +47,14 @@ const getAmedasCodeFromClass20Code = (class20Code, forecastAreasJson) => {
   }
 };
 
-const dateTimeToLatestDate = (dateTimeStr) => {
+const getDateTimeInfo = (dateTimeStr) => {
   const year = dateTimeStr.substring(0, 4);
   const month = dateTimeStr.substring(5, 7);
-  const date = dateTimeStr.substring(8, 10);
+  const day = dateTimeStr.substring(8, 10);
   const hour = dateTimeStr.substring(11, 13);
 
-  latestDate = year + month + date + hour;
-  return { hour, latestDate };
+  date = year + month + day
+  return { hour, date };
 }
 
 const getHours = (hour) => {
@@ -78,7 +78,7 @@ const getHours = (hour) => {
 }
 
 // let hour, hours, latestDatess, amedasTemps;
-let hour, hours, latestDate;
+let hours;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -96,12 +96,24 @@ let hour, hours, latestDate;
   const res4 = await fetch(
     `https://www.jma.go.jp/bosai/amedas/data/latest_time.txt`
   );
-  const dateTime = await res4.text();
+  const dateTimeText = await res4.text();
+  const date = new Date(dateTimeText);
+  console.log(`index.js 101`, dateTimeText, date.toString());
+  date.setMinutes(0);
+  console.log(`index.js 103`, date.toString());
 
-  const { hour, latestDate } = dateTimeToLatestDate(dateTime);
-
-  hours = getHours(Number(hour));
-
+  hours = [
+    new Date(date.getTime()),
+    new Date(date.getTime()),
+    new Date(date.getTime()),
+    new Date(date.getTime()),
+    date,
+  ];
+  hours[0].setHours(-4);
+  hours[1].setHours(-3);
+  hours[2].setHours(-2);
+  hours[3].setHours(-1);
+  console.log(`index.js 112`, hours)
 
   // console.log({ areaJson, latestDate });
   // console.log({ forecastAreasJson });
@@ -113,7 +125,7 @@ let hour, hours, latestDate;
   forecastAreas = forecastAreasJson;
   amedases = amedasesJson;
 
-  console.log(`index.js 103`, amedasesJson, forecastAreasJson)
+  // console.log(`index.js 103`, amedasesJson, forecastAreasJson)
 
   // 地域のセレクトボックス
   for (const regionCode of Object.keys(regions)) {
@@ -173,31 +185,51 @@ const changeCity = async () => {
     isPelement.remove();
   }
 
-  console.log(
-    `index.js 133`,
-    amedasCode,
-    latestDate,
-    `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
-  );
+  console.log(`index.js 175`, amedasCode, selectedClass20Code, forecastAreas);
+
+  // console.log(
+  //   `index.js 133`,
+  //   amedasCode,
+  //   latestDate,
+  //   `https://www.jma.go.jp/bosai/amedas/data/point/${amedasCode}/${latestDate}_${'06'}.json`
+  // );
 
   // console.log(amedases[amedasCode]);
-  if (amedasCode !== undefined) {
+  if (amedasCode === undefined) {
     console.log('気圧データはありません');
     return;
   }
 
   // 全国のアメダス観測所の情報のURL
-  const res5 = await fetch(
-    `https://www.jma.go.jp/bosai/amedas/data/map/${latestDate}0000.json`
-  );
-  const resultAmedasData = await res5.json();
+  const fetchs = [];
+  const dateHourTexts = hours.map(hour=>{
+    const yearText = hour.getFullYear();
+    const monthText = (hour.getMonth() + 1).toString().padStart(2, `0`);
+    const dateText = hour.getDate().toString().padStart(2, `0`);
+    const hourText = hour.getHours().toString().padStart(2, `0`);
+    return yearText + monthText + dateText + hourText;
+  });
+  for (const dateHourText of dateHourTexts) {
+    fetchs.push(
+      fetch(
+        `https://www.jma.go.jp/bosai/amedas/data/map/${dateHourText}0000.json`
+      )
+    );
+  }
+  const resArray = await Promise.all(fetchs);
+  const resultAmedasDatas = await Promise.all(resArray.map(res=>res.json()));
+
   // console.log(resultAmedasData);
   console.log(
     `index.js 165`,
     amedasCode,
     // amedases[amedasCode],
-    resultAmedasData
+    // resultAmedasData
+    resultAmedasDatas
   );
+
+  const resultAmedasData = resultAmedasDatas[resultAmedasDatas.length - 1];
+  const hour = hours[hours.length - 1].getHours();
 
   amedasTemps = [];
 
@@ -210,7 +242,15 @@ const changeCity = async () => {
   h1.insertAdjacentElement('afterend', h2);
   h2.insertAdjacentElement('afterend', pElement);
 
-  updateChart(hours, [0, 0, 0, 0, amedasTemp]);
+  updateChart(hours.map(hour=>`${hour.getHours().toString().padStart(2, `0`)}:00`),
+    [
+      resultAmedasDatas[0][amedasCode].temp[0],
+      resultAmedasDatas[1][amedasCode].temp[0],
+      resultAmedasDatas[2][amedasCode].temp[0],
+      resultAmedasDatas[3][amedasCode].temp[0],
+      resultAmedasDatas[4][amedasCode].temp[0],
+    ]
+  );
 };
 
 const updateChart = (hours, temps) => {
