@@ -73,11 +73,22 @@ let hour, hours, latestDatess, amedasTemps;
 
   latestDate = year + month + date + hour;
 
+  // console.log(`index.js 76`, hour)
   hours = [];
-  for (let i = 0; i < 5; i++) {
-    hour = hour - 1;
-    hours.unshift(hour);
+  for (const i of [0, 1, 2, 3, 4]) {
+    const hourValue = hour - 5 + i
+    if (hourValue < 0) {
+      hours.push(24 + hourValue)
+    } else {
+      hours.push(hourValue)
+    }
   }
+  // console.log(`index.js 84`, hours)
+
+  // hour = 4;
+  //  hours = [23, 0, 1, 2, 3];
+  // hour = 23;
+  //  hours = [18, 19, 20, 21, 22];
 
   console.log({ areaJson, latestDate });
   console.log({ forecastAreasJson });
