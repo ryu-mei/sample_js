@@ -8,5 +8,11 @@
   },
   "action": {
     "default_popup": "sample1.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.gizmodo.jp/*"],
+      "js": ["sample.js"]
+    }
+  ]
 }
