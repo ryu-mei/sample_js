@@ -50,7 +50,12 @@ const initMap = async () => {
   const { Map } = await google.maps.importLibrary('maps');
   const { Geocoder } = await google.maps.importLibrary('geocoding');
   geocoder = new google.maps.Geocoder();
-  addresses.forEach((address, index) => {
+  map = new Map(document.querySelector('#map'), {
+    zoom: 14,
+    center: { lat: 39.275377, lng: 141.885771 },
+  });
+
+  for (const address of addresses) {
     geocoder.geocode({ 'address': address }, (results, status) => {
       if (status === 'OK') {
         const marker = new google.maps.Marker({
@@ -64,12 +69,7 @@ const initMap = async () => {
         );
       }
     });
-  })
-
-  map = new Map(document.querySelector('#map'), {
-    zoom: 14,
-    center: { lat: 39.275377, lng: 141.885771 },
-  });
+  }
 };
 
 initMap();
