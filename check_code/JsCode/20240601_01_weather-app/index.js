@@ -78,7 +78,7 @@ const getHours = (hour) => {
 }
 
 // let hour, hours, latestDatess, amedasTemps;
-let hours;
+let times;
 (async () => {
   const res1 = await fetch(
     `https://www.jma.go.jp/bosai/common/const/area.json`
@@ -102,18 +102,18 @@ let hours;
   date.setMinutes(0);
   console.log(`index.js 103`, date.toString());
 
-  hours = [
+  times = [
     new Date(date.getTime()),
     new Date(date.getTime()),
     new Date(date.getTime()),
     new Date(date.getTime()),
     date,
   ];
-  hours[0].setHours(-4);
-  hours[1].setHours(-3);
-  hours[2].setHours(-2);
-  hours[3].setHours(-1);
-  console.log(`index.js 112`, hours)
+  times[0].setHours(date.getHours()-4);
+  times[1].setHours(date.getHours()-3);
+  times[2].setHours(date.getHours()-2);
+  times[3].setHours(date.getHours()-1);
+  console.log(`index.js 112`, times)
 
   // console.log({ areaJson, latestDate });
   // console.log({ forecastAreasJson });
@@ -144,7 +144,7 @@ let hours;
   updateClass20Selectbox(prefSelect.options[0].value);
 
   // ダミーデータの送付
-  updateChart(hours, [1, 0, 4, 5, 10]);
+  updateChart(times.map(t=>t.getHours()), [1, 0, 4, 5, 10]);
 })();
 
 const changeRegion = () => {
@@ -202,7 +202,7 @@ const changeCity = async () => {
 
   // 全国のアメダス観測所の情報のURL
   const fetchs = [];
-  const dateHourTexts = hours.map(hour=>{
+  const dateHourTexts = times.map(hour=>{
     const yearText = hour.getFullYear();
     const monthText = (hour.getMonth() + 1).toString().padStart(2, `0`);
     const dateText = hour.getDate().toString().padStart(2, `0`);
@@ -229,7 +229,7 @@ const changeCity = async () => {
   );
 
   const resultAmedasData = resultAmedasDatas[resultAmedasDatas.length - 1];
-  const hour = hours[hours.length - 1].getHours();
+  const hour = times[times.length - 1].getHours();
 
   amedasTemps = [];
 
@@ -242,7 +242,7 @@ const changeCity = async () => {
   h1.insertAdjacentElement('afterend', h2);
   h2.insertAdjacentElement('afterend', pElement);
 
-  updateChart(hours.map(hour=>`${hour.getHours().toString().padStart(2, `0`)}:00`),
+  updateChart(times.map(hour=>`${hour.getHours().toString().padStart(2, `0`)}:00`),
     [
       resultAmedasDatas[0][amedasCode].temp[0],
       resultAmedasDatas[1][amedasCode].temp[0],
